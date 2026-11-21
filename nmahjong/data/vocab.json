@@ -1,0 +1,36 @@
+{
+  "format": "nmahjong-vocab",
+  "version": "1.0",
+  "yaku": {
+    "riichi": "立直", "double_riichi": "ダブル立直", "open_riichi": "オープン立直", "ippatsu": "一発",
+    "menzen_tsumo": "門前清自摸和", "tanyao": "断么九", "pinfu": "平和", "iipeikou": "一盃口",
+    "yakuhai_seat": "自風牌", "yakuhai_round": "場風牌", "yakuhai_haku": "白", "yakuhai_hatsu": "發", "yakuhai_chun": "中",
+    "haitei": "海底摸月", "houtei": "河底撈魚", "rinshan": "嶺上開花", "chankan": "槍槓",
+    "chiitoitsu": "七対子", "sanshoku": "三色同順", "ittsu": "一気通貫", "chanta": "混全帯么九",
+    "sanankou": "三暗刻", "sankantsu": "三槓子", "sanshoku_doukou": "三色同刻", "toitoi": "対々和",
+    "shousangen": "小三元", "honroutou": "混老頭", "junchan": "純全帯么九", "honitsu": "混一色",
+    "ryanpeikou": "二盃口", "chinitsu": "清一色", "nagashi_mangan": "流し満貫", "renhou": "人和",
+    "daisharin": "大車輪", "shousharin": "小車輪", "sanrenkou": "三連刻", "suurenkou": "四連刻", "sanpuu": "三風刻",
+    "manzu_honitsu": "萬子混一色", "tsuuiisou_chiitoi": "字一色七対子",
+    "dora": "ドラ", "ura_dora": "裏ドラ", "aka_dora": "赤ドラ", "kan_dora": "カンドラ", "nuki_dora": "抜きドラ", "mark_yaku": "印の役（牌の印に付けた 1 翻）"
+  },
+  "yakuman": {
+    "tenhou": "天和", "chiihou": "地和", "daisangen": "大三元", "suuankou": "四暗刻", "suuankou_tanki": "四暗刻単騎",
+    "tsuuiisou": "字一色", "ryuuiisou": "緑一色", "chinroutou": "清老頭", "kokushi": "国士無双", "kokushi13": "国士無双十三面",
+    "shousuushii": "小四喜", "daisuushii": "大四喜", "suukantsu": "四槓子", "chuuren": "九蓮宝燈", "junsei_chuuren": "純正九蓮宝燈",
+    "renhou": "人和（役満扱いのとき）", "daisharin": "大車輪（役満扱いのとき）", "suurenkou": "四連刻（役満扱いのとき）",
+    "nagashi_mangan": "流し満貫（役満扱いのとき）", "tsuuiisou_chiitoi": "字一色七対子",
+    "open_riichi_deal_in": "オープン立直への放銃（役満払い）"
+  },
+  "draw_reasons": ["exhaustive", "nine_terminals", "four_winds", "four_kans", "four_riichi", "three_ron", "nagashi_mangan"],
+  "win_kinds": ["ippatsu", "uradora", "yakuman", "haitei", "houtei", "rinshan", "chankan", "tsumo", "ron", "double_riichi", "renhou"],
+  "chips_on": ["win_with_mark", "win_kind", "kan", "nuki", "call", "tobi", "yakitori"],
+  "chips_payer": ["all", "loser", "kan_target"],
+  "kan_kinds": ["ankan", "minkan", "kakan"],
+  "meld_kinds": ["chi", "pon", "ankan", "minkan", "kakan", "nuki"],
+  "action_types": ["discard", "riichi", "tsumo", "ron", "chi", "pon", "kan", "nuki", "pass", "draw_declare"],
+  "metric_names": ["q", "prob", "preference", "ev_pt", "win", "dealin", "tenpai", "others_tenpai", "rank_prob", "chips_ev", "moves_to_win", "rank", "remaining"],
+  "end_reasons": ["regular", "tobi", "cold", "agari_yame", "tenpai_yame", "time_limit", "aborted", "max_honba"],
+  "record_end": ["finished", "aborted", "tobi", "cold", "time_limit", "in_progress"],
+  "source_kinds": ["played", "imported", "replayed", "generated"]
+}

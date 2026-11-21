@@ -1,0 +1,44 @@
+name: Bug report / 不具合の報告
+description: A wrong result, an error, or a description that is wrong as mahjong / 結果が違う、エラー、麻雀の記載としておかしい所
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Security problems must not be written here. See SECURITY.md.
+        セキュリティの問題はここに書かないでください（SECURITY.md）。
+        Do not paste personal names, e-mail addresses, or game logs that identify a person.
+        個人名、メールアドレス、個人が分かる牌譜を貼らないでください。
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Kind / 種類
+      options:
+        - Wrong result (score, yaku, fu, legal action, flow) / 結果が違う（点数、役、符、合法手、進行）
+        - Error or crash / エラーで止まる
+        - Python and JavaScript differ / Python と JavaScript で違う
+        - Wrong or odd as mahjong (term, rule, explanation) / 麻雀の記載としておかしい（用語、ルール、説明）
+        - Other / その他
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what you expected / 起きたことと、期待したこと
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: How to reproduce / 再現のしかた
+      description: The command or the short program, the rule name, and the file (record, wall, ruleset) if you can attach it / コマンドか短いプログラム、ルールの名前、付けられるならファイル
+  - type: input
+    id: source
+    attributes:
+      label: Source, if this is about a rule / ルールの話なら出典
+      description: URL or published document / URL か公開されている文書
+  - type: input
+    id: version
+    attributes:
+      label: Versions / 版
+      description: "nmahjong --version, Python or Node.js version, OS"

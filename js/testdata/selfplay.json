@@ -1,0 +1,674 @@
+[
+ {
+  "rs": "nm-2p-1-mps",
+  "bot": "simple",
+  "seed": "js-nm-2p-1-mps-simple",
+  "id": "sha256:be5450289208269d2137c96831fe980976167fe724183a5614d5bd1ce9146035",
+  "rounds": 5,
+  "final": {
+   "scores": [
+    6700,
+    43300
+   ],
+   "rank": [
+    2,
+    1
+   ],
+   "settled": [
+    -23.3,
+    23.3
+   ]
+  },
+  "end": "終了：和了止め"
+ },
+ {
+  "rs": "nm-2p-1-mps",
+  "bot": "tsumogiri",
+  "seed": "js-nm-2p-1-mps-tsumogiri",
+  "id": "sha256:c5f0806a419b1221afc0b5b213a32eb90f9c46c2620a43b395bcad8a073f2a9f",
+  "rounds": 51,
+  "final": {
+   "scores": [
+    25000,
+    25000
+   ],
+   "rank": [
+    1,
+    2
+   ],
+   "settled": [
+    5.0,
+    -5.0
+   ]
+  },
+  "end": "終了：本場の上限"
+ },
+ {
+  "rs": "nm-2p-1-mps",
+  "bot": "mix",
+  "seed": "js-nm-2p-1-mps-mix",
+  "id": "sha256:d979e7e4c2c62f65c398a770b1ee53a9231f97da999f2c781f7adefbbd3b4982",
+  "rounds": 2,
+  "final": {
+   "scores": [
+    57300,
+    -7300
+   ],
+   "rank": [
+    1,
+    2
+   ],
+   "settled": [
+    37.3,
+    -37.3
+   ]
+  },
+  "end": "終了：飛び"
+ },
+ {
+  "rs": "nm-2p-4-mps",
+  "bot": "simple",
+  "seed": "js-nm-2p-4-mps-simple",
+  "id": "sha256:80234caecfdfb91e7fc1ed8c2783e0b68e6f784f900169d0a16775293ffd98d6",
+  "rounds": 7,
+  "final": {
+   "scores": [
+    56600,
+    -6600
+   ],
+   "rank": [
+    1,
+    2
+   ],
+   "settled": [
+    36.6,
+    -36.6
+   ]
+  },
+  "end": "終了：飛び"
+ },
+ {
+  "rs": "nm-2p-4-mps",
+  "bot": "tsumogiri",
+  "seed": "js-nm-2p-4-mps-tsumogiri",
+  "id": "sha256:46ad709da2e46d623b156fac050cc3c063b6568198a454849ec4047f7d0fa723",
+  "rounds": 51,
+  "final": {
+   "scores": [
+    25000,
+    25000
+   ],
+   "rank": [
+    1,
+    2
+   ],
+   "settled": [
+    5.0,
+    -5.0
+   ]
+  },
+  "end": "終了：本場の上限"
+ },
+ {
+  "rs": "nm-2p-4-mps",
+  "bot": "mix",
+  "seed": "js-nm-2p-4-mps-mix",
+  "id": "sha256:b04c93f36ffc78b4b9ddd8d7e622eb0b27fb5bfc809d7b776812ab481b786ee7",
+  "rounds": 2,
+  "final": {
+   "scores": [
+    53300,
+    -3300
+   ],
+   "rank": [
+    1,
+    2
+   ],
+   "settled": [
+    33.3,
+    -33.3
+   ]
+  },
+  "end": "終了：飛び"
+ },
+ {
+  "rs": "nm-2p-7-mps",
+  "bot": "simple",
+  "seed": "js-nm-2p-7-mps-simple",
+  "id": "sha256:2a994119495772e716b83c01bacdead6db1ba5de1aac3a9e392ee7a9d78c98dd",
+  "rounds": 7,
+  "final": {
+   "scores": [
+    23200,
+    26800
+   ],
+   "rank": [
+    2,
+    1
+   ],
+   "settled": [
+    -6.8,
+    6.8
+   ]
+  },
+  "end": "終了：和了止め"
+ },
+ {
+  "rs": "nm-2p-7-mps",
+  "bot": "tsumogiri",
+  "seed": "js-nm-2p-7-mps-tsumogiri",
+  "id": "sha256:a2da3e04010aff7ad5c4a7ae147a6be18d6923d2ed0efd547b035dd3a45ebe33",
+  "rounds": 51,
+  "final": {
+   "scores": [
+    25000,
+    25000
+   ],
+   "rank": [
+    1,
+    2
+   ],
+   "settled": [
+    5.0,
+    -5.0
+   ]
+  },
+  "end": "終了：本場の上限"
+ },
+ {
+  "rs": "nm-2p-7-mps",
+  "bot": "mix",
+  "seed": "js-nm-2p-7-mps-mix",
+  "id": "sha256:3d80e8f28d9f4a0ef5e1262e30da52113eb106e4c895f987e346b3b534308266",
+  "rounds": 6,
+  "final": {
+   "scores": [
+    56400,
+    -6400
+   ],
+   "rank": [
+    1,
+    2
+   ],
+   "settled": [
+    36.4,
+    -36.4
+   ]
+  },
+  "end": "終了：飛び"
+ },
+ {
+  "rs": "nm-2p-10-mpsz",
+  "bot": "simple",
+  "seed": "js-nm-2p-10-mpsz-simple",
+  "id": "sha256:17c790d00c4be111882882a180072fc622249acd7795b18a371166a903cffce4",
+  "rounds": 2,
+  "final": {
+   "scores": [
+    53300,
+    -3300
+   ],
+   "rank": [
+    1,
+    2
+   ],
+   "settled": [
+    33.3,
+    -33.3
+   ]
+  },
+  "end": "終了：飛び"
+ },
+ {
+  "rs": "nm-2p-10-mpsz",
+  "bot": "tsumogiri",
+  "seed": "js-nm-2p-10-mpsz-tsumogiri",
+  "id": "sha256:5b1a949365d2b1669400f12c02dc8d14e26b5f947d1a09f3ea3f22182443fa69",
+  "rounds": 51,
+  "final": {
+   "scores": [
+    25000,
+    25000
+   ],
+   "rank": [
+    1,
+    2
+   ],
+   "settled": [
+    5.0,
+    -5.0
+   ]
+  },
+  "end": "終了：本場の上限"
+ },
+ {
+  "rs": "nm-2p-10-mpsz",
+  "bot": "mix",
+  "seed": "js-nm-2p-10-mpsz-mix",
+  "id": "sha256:ef79177cb1e674d31ee4df81812feaaf833299aa9d795a417c8b0fb04c2c76f6",
+  "rounds": 5,
+  "final": {
+   "scores": [
+    56000,
+    -6000
+   ],
+   "rank": [
+    1,
+    2
+   ],
+   "settled": [
+    36.0,
+    -36.0
+   ]
+  },
+  "end": "終了：飛び"
+ },
+ {
+  "rs": "nm-2p-13-mpsz",
+  "bot": "simple",
+  "seed": "js-nm-2p-13-mpsz-simple",
+  "id": "sha256:83be71ec3671a90facfd454c5bd20bffe0874c4c294f94dc333c0ad6d5398203",
+  "rounds": 13,
+  "final": {
+   "scores": [
+    33000,
+    17000
+   ],
+   "rank": [
+    1,
+    2
+   ],
+   "settled": [
+    13.0,
+    -13.0
+   ]
+  },
+  "end": "終了：規定の局数"
+ },
+ {
+  "rs": "nm-2p-13-mpsz",
+  "bot": "tsumogiri",
+  "seed": "js-nm-2p-13-mpsz-tsumogiri",
+  "id": "sha256:a57ae3f8fa291e40bb65ac4f17c3a2225f4543b8cbe8245f44de8996d21417cb",
+  "rounds": 51,
+  "final": {
+   "scores": [
+    25000,
+    25000
+   ],
+   "rank": [
+    1,
+    2
+   ],
+   "settled": [
+    5.0,
+    -5.0
+   ]
+  },
+  "end": "終了：本場の上限"
+ },
+ {
+  "rs": "nm-2p-13-mpsz",
+  "bot": "mix",
+  "seed": "js-nm-2p-13-mpsz-mix",
+  "id": "sha256:655ec201d6fd37f8bf4c8b2a669d7f9aea615751fae465e12ee5a4ee0e386cbb",
+  "rounds": 9,
+  "final": {
+   "scores": [
+    53500,
+    -3500
+   ],
+   "rank": [
+    1,
+    2
+   ],
+   "settled": [
+    33.5,
+    -33.5
+   ]
+  },
+  "end": "終了：飛び"
+ },
+ {
+  "rs": "tenhou-4p-tonpu-red",
+  "bot": "simple",
+  "seed": "js-tenhou-4p-tonpu-red-simple",
+  "id": "sha256:c91b42563a8b017815328327b92b62af8b7511dc1ab420f1f91d413fec3ac225",
+  "rounds": 4,
+  "final": {
+   "scores": [
+    43400,
+    19800,
+    27400,
+    9400
+   ],
+   "rank": [
+    1,
+    3,
+    2,
+    4
+   ],
+   "settled": [
+    54.0,
+    -20,
+    7,
+    -41
+   ]
+  },
+  "end": "終了：規定の局数"
+ },
+ {
+  "rs": "tenhou-4p-tonpu-red",
+  "bot": "mix",
+  "seed": "js-tenhou-4p-tonpu-red-mix",
+  "id": "sha256:d72218e3e288ec323869937518c3c93e1cc5204bac1c0c32d4c83796f90bd2c6",
+  "rounds": 4,
+  "final": {
+   "scores": [
+    35600,
+    16300,
+    25100,
+    23000
+   ],
+   "rank": [
+    1,
+    4,
+    2,
+    3
+   ],
+   "settled": [
+    46.0,
+    -34,
+    5,
+    -17
+   ]
+  },
+  "end": "終了：規定の局数"
+ },
+ {
+  "rs": "tenhou-3p",
+  "bot": "simple",
+  "seed": "js-tenhou-3p-simple",
+  "id": "sha256:d775044e45270d897b8bae7ff28da10c75937a2586e7cfdfa82cf53eec20b204",
+  "rounds": 9,
+  "final": {
+   "scores": [
+    31700,
+    46200,
+    27100
+   ],
+   "rank": [
+    2,
+    1,
+    3
+   ],
+   "settled": [
+    -8,
+    41.0,
+    -33
+   ]
+  },
+  "end": "終了：規定の局数"
+ },
+ {
+  "rs": "tenhou-3p",
+  "bot": "mix",
+  "seed": "js-tenhou-3p-mix",
+  "id": "sha256:d9e1765003e76c09fe2faa75d1ac28ff022e3eb12b9edf14733444156d259877",
+  "rounds": 8,
+  "final": {
+   "scores": [
+    67500,
+    5000,
+    32500
+   ],
+   "rank": [
+    1,
+    3,
+    2
+   ],
+   "settled": [
+    62.0,
+    -55,
+    -7
+   ]
+  },
+  "end": "終了：規定の局数"
+ },
+ {
+  "rs": "toutenkou-3p",
+  "bot": "simple",
+  "seed": "js-toutenkou-3p-simple",
+  "id": "sha256:4e54e5fb0f1df9f94354b08df4f2dfd264c8df304da716bc16d8a82d51d35f9b",
+  "rounds": 11,
+  "final": {
+   "scores": [
+    102,
+    -28,
+    76
+   ],
+   "rank": [
+    1,
+    3,
+    2
+   ],
+   "settled": [
+    72.0,
+    -88.0,
+    16.0
+   ]
+  },
+  "end": "終了：飛び"
+ },
+ {
+  "rs": "toutenkou-3p",
+  "bot": "mix",
+  "seed": "js-toutenkou-3p-mix",
+  "id": "sha256:9a9cce4435a3fc76ead4150f2798fac1367f1433d6cb2ce37717f7eddff248ea",
+  "rounds": 3,
+  "final": {
+   "scores": [
+    22,
+    -7,
+    135
+   ],
+   "rank": [
+    2,
+    3,
+    1
+   ],
+   "settled": [
+    -38.0,
+    -67.0,
+    105.0
+   ]
+  },
+  "end": "終了：飛び"
+ },
+ {
+  "rs": "sakae-shibuya",
+  "bot": "simple",
+  "seed": "js-sakae-shibuya-simple",
+  "id": "sha256:9196b0aabfe331e26070eb0bf467fc9ee063b8b543c2240914a68fe262f5313c",
+  "rounds": 8,
+  "final": {
+   "scores": [
+    16400,
+    14100,
+    39000,
+    30500
+   ],
+   "rank": [
+    3,
+    4,
+    1,
+    2
+   ],
+   "settled": [
+    -38.6,
+    -45.9,
+    69.0,
+    15.5
+   ],
+   "chips": [
+    -2,
+    -3,
+    4,
+    1
+   ]
+  },
+  "end": "終了：規定の局数"
+ },
+ {
+  "rs": "sakae-shibuya",
+  "bot": "mix",
+  "seed": "js-sakae-shibuya-mix",
+  "id": "sha256:a3db5185073de3b0882237170cdc3bd697be92b8721d42c3093c75b148d7c58a",
+  "rounds": 9,
+  "final": {
+   "scores": [
+    13900,
+    13200,
+    48900,
+    22000
+   ],
+   "rank": [
+    3,
+    4,
+    1,
+    2
+   ],
+   "settled": [
+    -26.1,
+    -41.8,
+    83.9,
+    -18.0
+   ],
+   "chips": [
+    -1,
+    -1,
+    2,
+    0
+   ]
+  },
+  "end": "終了：規定の局数"
+ },
+ {
+  "rs": "pocchi-house",
+  "bot": "simple",
+  "seed": "js-pocchi-house-simple",
+  "id": "sha256:53d7bb0576bc165b99954ee9feeb79b16950993f5d0e151144ee61569565fdd9",
+  "rounds": 9,
+  "final": {
+   "scores": [
+    52200,
+    33800,
+    5500,
+    8500
+   ],
+   "rank": [
+    1,
+    2,
+    4,
+    3
+   ],
+   "settled": [
+    92.2,
+    23.8,
+    -74.5,
+    -41.5
+   ],
+   "chips": [
+    15,
+    1,
+    -9,
+    -7
+   ]
+  },
+  "end": "終了：規定の局数"
+ },
+ {
+  "rs": "pocchi-house",
+  "bot": "mix",
+  "seed": "js-pocchi-house-mix",
+  "id": "sha256:530b1b774be24f2f066eba5618c7ca6b0b145fa5dc260d012c9c3b37494144f5",
+  "rounds": 9,
+  "final": {
+   "scores": [
+    15200,
+    12300,
+    61000,
+    11500
+   ],
+   "rank": [
+    2,
+    3,
+    1,
+    4
+   ],
+   "settled": [
+    5.2,
+    -37.7,
+    101.0,
+    -68.5
+   ],
+   "chips": [
+    -5,
+    -4,
+    14,
+    -5
+   ]
+  },
+  "end": "終了：規定の局数"
+ },
+ {
+  "rs": "kansai-3p",
+  "bot": "simple",
+  "seed": "js-kansai-3p-simple",
+  "id": "sha256:589c38c8a106467b2cc766e7145ffb265620856c0a1ead75ffb74645ed41841d",
+  "rounds": 11,
+  "final": {
+   "scores": [
+    -15667,
+    40001,
+    50666
+   ],
+   "rank": [
+    3,
+    2,
+    1
+   ],
+   "settled": [
+    -45.667,
+    10.001,
+    35.666
+   ]
+  },
+  "end": "終了：規定の局数"
+ },
+ {
+  "rs": "kansai-3p",
+  "bot": "mix",
+  "seed": "js-kansai-3p-mix",
+  "id": "sha256:0cfaf3922332bb63b3927f08f9ef4479cf3900e33e8c17fb5f624bda4627573e",
+  "rounds": 8,
+  "final": {
+   "scores": [
+    34665,
+    -14665,
+    55000
+   ],
+   "rank": [
+    2,
+    3,
+    1
+   ],
+   "settled": [
+    4.665,
+    -44.665,
+    40.0
+   ]
+  },
+  "end": "終了：規定の局数"
+ }
+]

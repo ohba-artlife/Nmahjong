@@ -1,0 +1,40 @@
+name: Rule correction / ルールの直し
+description: A bundled rule differs from the real rule of the organisation, service or parlour / 同梱ルールが実際のルールと違う
+labels: ["rule"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Bundled rules were written from published rule texts. Items not stated there were set to the most plausible value and are listed in the rule's `unknown` field.
+        同梱ルールは公開されているルールの文から書いています。書かれていない項目はいちばん妥当な値にしてあり、ルールの `unknown` の欄に並べています。
+  - type: input
+    id: rule
+    attributes:
+      label: Bundled rule name / 同梱ルールの名前
+      placeholder: "mleague"
+    validations:
+      required: true
+  - type: textarea
+    id: item
+    attributes:
+      label: Item, current value, correct value / 項目、今の値、正しい値
+      placeholder: "game_rules.flow.triple_ron: now \"draw\", should be \"allow\""
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Source / 出典
+      description: A URL or a published document that anyone can read, with the sentence quoted / だれでも読める URL か文書と、その文
+    validations:
+      required: true
+  - type: dropdown
+    id: relation
+    attributes:
+      label: Your relation to the rule / そのルールとの関係
+      options:
+        - I run or belong to the organisation, service or parlour / 運営している・所属している
+        - I play under this rule / このルールで打っている
+        - I read the published rule / 公開されているルールを読んだ
+    validations:
+      required: true

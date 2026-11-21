@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use Nmahjong, please cite it as below."
+title: "Nmahjong: data formats for N-tile mahjong (tileset, ruleset, wall, record, annotation) with reference implementations"
+type: software
+authors:
+  - name: "ohba-artlife"
+version: "1.0.0"
+date-released: "2026-11-22"
+license: MIT
+repository-code: "https://github.com/ohba-artlife/Nmahjong"
+keywords:
+  - mahjong
+  - riichi mahjong
+  - game record
+  - data format
+  - reference implementation
+abstract: >-
+  Nmahjong defines five layers of data for mahjong generalised by the set of tiles,
+  the hand size N and the number of players M: tileset, ruleset, wall, record and annotation.
+  Every object is identified by the SHA-256 hash of its canonical JSON.
+  A reference implementation in Python and a second implementation in JavaScript
+  create, verify and replay these data, judge winning hands, and run games;
+  46 rulesets written from published rule texts are bundled.

@@ -1,0 +1,15 @@
+Nmahjong 仕様文書（docs/ 以下の文書と README*.md）
+
+Copyright (c) 2026 ohba-artlife
+
+この仕様文書は クリエイティブ・コモンズ 表示 4.0 国際 ライセンス（CC BY 4.0）の下に提供します。
+出典（Nmahjong, ohba-artlife）を表示すれば、複製・再配布・改変・商用利用ができます。
+ライセンス全文: https://creativecommons.org/licenses/by/4.0/legalcode.ja
+
+The specification documents listed above are licensed under the Creative Commons
+Attribution 4.0 International License (CC BY 4.0). You may copy, redistribute, adapt and
+use them commercially as long as you give credit (Nmahjong, ohba-artlife).
+Full text: https://creativecommons.org/licenses/by/4.0/legalcode
+
+実装（nmahjong/ 以下の Python、js/ 以下の JavaScript、tools/、tests/）は LICENSE（MIT）に従います。
+同梱の既定ルール集・牌表（nmahjong/data/）は実装の一部として MIT です。各ルールの出典は各ファイルの meta.source に記載しています。

@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nmahjong"
+version = "1.0.0"
+description = "Data formats for N-tile mahjong (tileset, ruleset, wall, record, annotation) with a reference implementation"
+requires-python = ">=3.11"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [{name = "ohba-artlife"}]
+dependencies = []
+keywords = ["mahjong", "riichi mahjong", "game record", "data format"]
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Games/Entertainment :: Board Games",
+]
+
+[project.urls]
+Repository = "https://github.com/ohba-artlife/Nmahjong"
+Issues = "https://github.com/ohba-artlife/Nmahjong/issues"
+Changelog = "https://github.com/ohba-artlife/Nmahjong/blob/main/CHANGELOG.md"
+
+[project.scripts]
+nmahjong = "nmahjong.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["nmahjong*"]
+
+[tool.setuptools.package-data]
+nmahjong = ["data/*.json", "data/tilesets/*.json", "data/rulesets/*.json", "data/schema/*.json"]

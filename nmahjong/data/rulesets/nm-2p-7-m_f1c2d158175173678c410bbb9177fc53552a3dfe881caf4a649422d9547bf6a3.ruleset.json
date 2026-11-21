@@ -1,0 +1,227 @@
+{
+ "format": "nmahjong-ruleset",
+ "version": "1.0",
+ "name": "nm-2p-7-m",
+ "id": "sha256:f1c2d158175173678c410bbb9177fc53552a3dfe881caf4a649422d9547bf6a3",
+ "tileset": {
+  "name": "m",
+  "id": "sha256:a791d2ba3285d1dd3f843b603eaaad65901b2c06e508e05990648b4dc90ef44b"
+ },
+ "players": 2,
+ "hand_size": 7,
+ "length": "east_south",
+ "winds": [
+  "E",
+  "W"
+ ],
+ "meta": {
+  "source": "nm-defaults.md §2.2（4 枚麻雀の延長）",
+  "note": "7 枚麻雀（4 枚麻雀の延長の既定）：2 人、手牌 7 枚（2 面子＋雀頭）、王牌 4（ドラ表示・裏ドラ表示・嶺上 2）、暗槓のみ・各自 1 回（1 局 2 回まで）・ポンなし・カンドラなし、役は面子＋雀頭で作れる標準の役（七対子・国士無双なし、人和は役満）、符・点数・支払い・本場・供託・終了・精算は 4 枚麻雀と同じ。王牌の枚数・カンの回数・役は ruleset の項目で変えられる"
+ },
+ "wall_rules": {
+  "deal": "N_each_then_1_to_dealer",
+  "dead_wall": 4,
+  "dora_indicator": [
+   0
+  ],
+  "ura_indicator": [
+   1
+  ],
+  "rinshan": [
+   3,
+   -1
+  ],
+  "break": {
+   "by": "none"
+  }
+ },
+ "game_rules": {
+  "agari_form": "standard",
+  "marks": {},
+  "mark_overrides": [],
+  "dora": {
+   "indicator": true,
+   "ura": true,
+   "kan": false,
+   "kan_ura": false,
+   "kan_timing": {
+    "ankan": "immediate",
+    "minkan": "after_discard",
+    "kakan": "after_discard"
+   },
+   "values": {
+    "indicator": 1,
+    "ura": 1,
+    "kan": 1,
+    "kan_ura": 1
+   }
+  },
+  "nuki": {
+   "enabled": false
+  },
+  "yaku": {
+   "base": "riichi-standard",
+   "overrides": {
+    "renhou": "yakuman",
+    "chiitoitsu": false,
+    "kokushi": false
+   },
+   "chiitoi_four_of_kind": false
+  },
+  "nagashi_mangan": {
+   "enabled": false
+  },
+  "pao": {
+   "yakuman": [],
+   "tsumo": "full",
+   "ron": "split",
+   "honba_kyotaku": "discarder",
+   "daiminkan_rinshan": false
+  },
+  "flow": {
+   "open_tanyao": true,
+   "atozuke": "allowed",
+   "kuikae": "forbidden",
+   "chi": false,
+   "ippatsu": true,
+   "riichi": {
+    "min_points": 1000,
+    "below_min": "forbidden",
+    "without_draw": true,
+    "on_houtei": false,
+    "furiten_riichi": true,
+    "ankan_after": "if_shape_unchanged",
+    "stick_at_end": "to_first",
+    "stick_if_ronned": false
+   },
+   "open_riichi": {
+    "enabled": false
+   },
+   "renchan": {
+    "dealer_win": true,
+    "dealer_tenpai": true,
+    "all_noten": false,
+    "draw": true,
+    "by_bakaze": {}
+   },
+   "renchan_on_abort": true,
+   "ryukyoku": {
+    "nine_terminals": false,
+    "four_winds": false,
+    "four_kans": false,
+    "four_riichi": false,
+    "three_ron": false
+   },
+   "double_ron": false,
+   "triple_ron": "head",
+   "kyotaku_to": "kamicha",
+   "wareme": false,
+   "kokushi_ankan_chankan": false,
+   "ryuuiisou_requires_hatsu": false,
+   "chuuren_any_suit": true,
+   "max_kans": 2,
+   "pon": false,
+   "kan_kinds": [
+    "ankan"
+   ],
+   "max_kans_per_player": 1
+  },
+  "scoring": {
+   "table": "standard",
+   "honba_points": 300,
+   "kyotaku_points": 1000,
+   "noten_penalty": 0,
+   "mangan_round_up": false,
+   "round_to": 100,
+   "fu": {
+    "enabled": true,
+    "double_wind_pair": 4,
+    "rinshan_tsumo_fu": 2,
+    "chiitoi": "25fu_2han",
+    "open_pinfu_fu": 30,
+    "menzen_tsumo_pinfu": true,
+    "yakuhai_tanki_fu": 0
+   },
+   "limits": {
+    "sanbaiman_from": 11,
+    "kazoe_from": 13,
+    "yakuman_base": 4,
+    "max_multiple": 2,
+    "stack_with_normal": false
+   },
+   "shibari": {
+    "from_honba": null,
+    "han": 2,
+    "exclude_dora": true
+   },
+   "tsumo_loss": "none",
+   "payment": "4p_dealer_share_from_opponent"
+  },
+  "penalties": {
+   "chombo": {
+    "kind": "rank_points",
+    "value": 20,
+    "replay": true,
+    "honba_increase": false
+   },
+   "false_call": {
+    "kind": "agari_houki"
+   },
+   "noten_riichi": "chombo"
+  }
+ },
+ "end": {
+  "tobi": {
+   "enabled": true,
+   "at": 0,
+   "exact_zero_is_tobi": false,
+   "on_noten_penalty": true,
+   "penalty_points": 0,
+   "penalty_to": "none"
+  },
+  "negative_points": "continue",
+  "cold_points": null,
+  "time_limit_sec": null,
+  "extension": {
+   "enabled": false
+  },
+  "agari_yame": {
+   "enabled": true,
+   "when": "last_round",
+   "forced": true,
+   "others_may_continue": false
+  },
+  "tenpai_yame": {
+   "enabled": true,
+   "forced": true,
+   "require_tenpai": false
+  },
+  "max_honba": 50
+ },
+ "settlement": {
+  "start_points": 25000,
+  "return_points": 30000,
+  "unit": {
+   "name": "pt",
+   "points_per_unit": 1000,
+   "decimals": 1
+  },
+  "uma": [
+   0,
+   0
+  ],
+  "oka": "to_first",
+  "tie": "seat_order",
+  "dealer_takes_all": false,
+  "chips": [],
+  "yakitori": {
+   "enabled": false
+  },
+  "external_points": [],
+  "payout": null,
+  "rounding": {
+   "score_to_1000": "none",
+   "remainder_to_top": false
+  }
+ }
+}

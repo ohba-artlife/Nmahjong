@@ -1,0 +1,303 @@
+{
+ "format": "nmahjong-ruleset",
+ "version": "1.0",
+ "name": "kansai-3p",
+ "tileset": {
+  "name": "mpsz-x28",
+  "id": "sha256:5b8c5f68ce9e13fab6839a7dcfdfc4db12879c114976e5325586e4dc7a728606"
+ },
+ "players": 3,
+ "hand_size": 13,
+ "length": "east_south",
+ "winds": [
+  "E",
+  "S",
+  "W"
+ ],
+ "unknown": [
+  "settlement.uma",
+  "settlement.start_points",
+  "settlement.return_points",
+  "end.tobi",
+  "game_rules.scoring.noten_penalty"
+ ],
+ "meta": {
+  "source": [
+   "https://ameblo.jp/kansai3mj/entry-12100946684.html",
+   "https://ja.wikipedia.org/wiki/%E4%B8%89%E4%BA%BA%E9%BA%BB%E9%9B%80"
+  ],
+  "note": "関西サンマ一般：五筒・五索は全部赤（ドラ）、嶺上牌は 8 枚でその隣がドラ表示牌、抜きドラ 4 枚（出典の多数派は店ごとの華牌を抜く形。華牌は店ごとに違うので、ここでは出典にある北抜きの形にしてある。北は、北や字牌が要る役満のほかは手の内に使えない）、完全先付け（喰いタン・後付け・片和了なし）、チーなし、フリテン立直不可、1000 点単位（100 点棒なし）、積み棒 1000 点、ツモ損なし（丸取り。子のツモは満貫 5000-3000、跳満 8000-4000、倍満 10000-6000、三倍満 16000-8000、役満 20000-12000、親のツモはロンの半分ずつ）、南場は親ノーテン連荘、大車輪（清一色七対子）は役満、小車輪（混一色七対子）6 翻、四連刻は役満、三連刻・三風 2 翻、七対子の 4 枚使いあり、流し役満、数え 14"
+ },
+ "wall_rules": {
+  "deal": "N_each_then_1_to_dealer",
+  "dead_wall": 14,
+  "dora_indicator": [
+   4
+  ],
+  "ura_indicator": [
+   5
+  ],
+  "kan_dora": [
+   2,
+   0,
+   -2,
+   -4
+  ],
+  "kan_ura": [
+   3,
+   1,
+   -1,
+   -3
+  ],
+  "rinshan": [
+   12,
+   13,
+   10,
+   11,
+   8,
+   9,
+   6,
+   7
+  ],
+  "break": {
+   "by": "dice"
+  }
+ },
+ "game_rules": {
+  "agari_form": "standard",
+  "marks": {
+   "red": {
+    "effects": [
+     "dora"
+    ]
+   }
+  },
+  "mark_overrides": [],
+  "dora": {
+   "indicator": true,
+   "ura": true,
+   "kan": true,
+   "kan_ura": true,
+   "kan_timing": {
+    "ankan": "immediate",
+    "minkan": "after_discard",
+    "kakan": "after_discard"
+   },
+   "values": {
+    "indicator": 1,
+    "ura": 1,
+    "kan": 1,
+    "kan_ura": 1
+   }
+  },
+  "nuki": {
+   "enabled": true,
+   "tiles": [
+    "N"
+   ],
+   "value": 1,
+   "win_with_nuki_in_hand": false,
+   "as_yakuhai": "none",
+   "chan_nuki": false,
+   "pao": false,
+   "forbid_keep": false
+  },
+  "yaku": {
+   "base": "riichi-standard",
+   "overrides": {
+    "daisharin": "yakuman",
+    "shousharin": 6,
+    "suurenkou": "yakuman",
+    "sanrenkou": 2,
+    "sanpuu": 2,
+    "nagashi_mangan": "yakuman"
+   },
+   "chiitoi_four_of_kind": true,
+   "wheel": "any_suit"
+  },
+  "nagashi_mangan": {
+   "enabled": true,
+   "as": "yakuman",
+   "noten_penalty": false,
+   "renchan_if_dealer_tenpai": true
+  },
+  "pao": {
+   "yakuman": [
+    "daisangen",
+    "daisuushii",
+    "suukantsu"
+   ],
+   "tsumo": "full",
+   "ron": "split",
+   "honba_kyotaku": "discarder",
+   "daiminkan_rinshan": false
+  },
+  "flow": {
+   "open_tanyao": false,
+   "atozuke": "kanzen_sakizuke",
+   "kuikae": "forbidden",
+   "chi": false,
+   "ippatsu": true,
+   "riichi": {
+    "min_points": 1000,
+    "below_min": "forbidden",
+    "without_draw": true,
+    "on_houtei": true,
+    "furiten_riichi": false,
+    "ankan_after": "if_shape_unchanged",
+    "stick_at_end": "stays",
+    "stick_if_ronned": false
+   },
+   "open_riichi": {
+    "enabled": false
+   },
+   "renchan": {
+    "dealer_win": true,
+    "dealer_tenpai": true,
+    "all_noten": false,
+    "draw": false,
+    "by_bakaze": {
+     "S": {
+      "dealer_tenpai": true,
+      "dealer_noten": true,
+      "all_noten": true
+     }
+    }
+   },
+   "renchan_on_abort": true,
+   "ryukyoku": {
+    "nine_terminals": false,
+    "four_winds": false,
+    "four_kans": false,
+    "four_riichi": false,
+    "three_ron": false
+   },
+   "double_ron": false,
+   "triple_ron": "head",
+   "kyotaku_to": "kamicha",
+   "wareme": false,
+   "kokushi_ankan_chankan": false,
+   "ryuuiisou_requires_hatsu": false,
+   "chuuren_any_suit": true,
+   "max_kans": 4,
+   "pon": true,
+   "kan_kinds": [
+    "ankan",
+    "minkan",
+    "kakan"
+   ],
+   "max_kans_per_player": null
+  },
+  "scoring": {
+   "table": "standard",
+   "honba_points": 1000,
+   "kyotaku_points": 1000,
+   "noten_penalty": 3000,
+   "mangan_round_up": true,
+   "round_to": 1000,
+   "fu": {
+    "enabled": true,
+    "double_wind_pair": 2,
+    "rinshan_tsumo_fu": 2,
+    "chiitoi": "25fu_2han",
+    "open_pinfu_fu": 30,
+    "menzen_tsumo_pinfu": true,
+    "yakuhai_tanki_fu": 0
+   },
+   "limits": {
+    "sanbaiman_from": 11,
+    "kazoe_from": 14,
+    "yakuman_base": 4,
+    "max_multiple": 1,
+    "stack_with_normal": false
+   },
+   "shibari": {
+    "from_honba": null,
+    "han": 2,
+    "exclude_dora": true
+   },
+   "tsumo_loss": "marudori",
+   "payment": "standard",
+   "tsumo_table": {
+    "8000": [
+     5000,
+     3000
+    ],
+    "12000": [
+     8000,
+     4000
+    ],
+    "16000": [
+     10000,
+     6000
+    ],
+    "24000": [
+     16000,
+     8000
+    ],
+    "32000": [
+     20000,
+     12000
+    ]
+   }
+  },
+  "penalties": {
+   "chombo": {
+    "kind": "rank_points",
+    "value": 20,
+    "replay": true,
+    "honba_increase": false
+   },
+   "false_call": {
+    "kind": "agari_houki"
+   },
+   "noten_riichi": "chombo"
+  }
+ },
+ "end": {
+  "tobi": {
+   "enabled": false
+  },
+  "negative_points": "continue",
+  "cold_points": null,
+  "time_limit_sec": null,
+  "extension": {
+   "enabled": false
+  },
+  "agari_yame": {
+   "enabled": false
+  },
+  "tenpai_yame": {
+   "enabled": false
+  },
+  "max_honba": null
+ },
+ "settlement": {
+  "start_points": 25000,
+  "return_points": 30000,
+  "unit": {
+   "name": "pt",
+   "points_per_unit": 1000,
+   "decimals": 1
+  },
+  "uma": [
+   0,
+   0,
+   0
+  ],
+  "oka": "to_first",
+  "tie": "split",
+  "dealer_takes_all": false,
+  "chips": [],
+  "yakitori": {
+   "enabled": false
+  },
+  "external_points": [],
+  "payout": null,
+  "rounding": {
+   "score_to_1000": "none",
+   "remainder_to_top": false
+  }
+ },
+ "id": "sha256:1fc5a76247beb9e9874d3c67b9d0919f83ce03e3deaf437677bda62f586d226a"
+}

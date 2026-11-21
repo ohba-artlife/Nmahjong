@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Security problem / セキュリティの問題
+    url: https://github.com/ohba-artlife/Nmahjong/security/advisories/new
+    about: Report privately. Do not open a public issue. / 非公開で報告してください。公開の Issue に書かないでください。

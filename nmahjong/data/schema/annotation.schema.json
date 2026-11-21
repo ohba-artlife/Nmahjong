@@ -1,0 +1,281 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://nmahjong.dev/schema/annotation.schema.json",
+ "title": "Nmahjong annotation 1.0",
+ "type": "object",
+ "additionalProperties": false,
+ "properties": {
+  "format": {
+   "const": "nmahjong-annotation"
+  },
+  "version": {
+   "const": "1.0"
+  },
+  "id": {
+   "type": "string",
+   "pattern": "^sha256:[0-9a-f]{64}$"
+  },
+  "record": {
+   "type": "object",
+   "required": [
+    "id"
+   ],
+   "properties": {
+    "name": {
+     "type": "string"
+    },
+    "id": {
+     "type": "string",
+     "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+   }
+  },
+  "evaluator": {
+   "type": "object",
+   "required": [
+    "name",
+    "version",
+    "visibility",
+    "metrics"
+   ],
+   "additionalProperties": false,
+   "properties": {
+    "name": {
+     "type": "string",
+     "pattern": "^[a-z0-9-]+$"
+    },
+    "version": {
+     "type": "string"
+    },
+    "visibility": {
+     "enum": [
+      "full",
+      "actor",
+      "none"
+     ]
+    },
+    "metrics": {
+     "type": "array",
+     "minItems": 1,
+     "items": {
+      "type": "object",
+      "required": [
+       "name",
+       "scope",
+       "kind"
+      ],
+      "additionalProperties": false,
+      "properties": {
+       "name": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]*$"
+       },
+       "scope": {
+        "enum": [
+         "candidate",
+         "point"
+        ]
+       },
+       "kind": {
+        "enum": [
+         "prob",
+         "prob_vector",
+         "value",
+         "count",
+         "rank"
+        ]
+       },
+       "higher_is_better": {
+        "type": "boolean"
+       },
+       "primary": {
+        "type": "boolean"
+       },
+       "unit": {
+        "type": "string"
+       }
+      }
+     }
+    },
+    "params": {
+     "type": "object"
+    },
+    "run_at": {
+     "type": "string"
+    }
+   }
+  },
+  "points": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "required": [
+     "round",
+     "at",
+     "phase",
+     "actor",
+     "actual",
+     "candidates",
+     "best",
+     "loss"
+    ],
+    "additionalProperties": false,
+    "properties": {
+     "round": {
+      "type": "integer",
+      "minimum": 0
+     },
+     "at": {
+      "type": "integer",
+      "minimum": 0
+     },
+     "phase": {
+      "enum": [
+       "A",
+       "B",
+       "C"
+      ]
+     },
+     "actor": {
+      "type": "integer",
+      "minimum": 0
+     },
+     "actual": {
+      "type": "object",
+      "required": [
+       "type"
+      ],
+      "properties": {
+       "type": {
+        "enum": [
+         "discard",
+         "riichi",
+         "tsumo",
+         "ron",
+         "chi",
+         "pon",
+         "kan",
+         "nuki",
+         "pass",
+         "draw_declare"
+        ]
+       },
+       "tile": {
+        "type": "integer",
+        "minimum": 0
+       },
+       "tiles": {
+        "type": "array",
+        "items": {
+         "type": "integer",
+         "minimum": 0
+        }
+       },
+       "kind": {
+        "enum": [
+         "ankan",
+         "minkan",
+         "kakan"
+        ]
+       },
+       "open": {
+        "type": "boolean"
+       },
+       "reason": {
+        "type": "string"
+       },
+       "values": {
+        "type": "object"
+       }
+      }
+     },
+     "candidates": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+       "type": "object",
+       "required": [
+        "type"
+       ],
+       "properties": {
+        "type": {
+         "enum": [
+          "discard",
+          "riichi",
+          "tsumo",
+          "ron",
+          "chi",
+          "pon",
+          "kan",
+          "nuki",
+          "pass",
+          "draw_declare"
+         ]
+        },
+        "tile": {
+         "type": "integer",
+         "minimum": 0
+        },
+        "tiles": {
+         "type": "array",
+         "items": {
+          "type": "integer",
+          "minimum": 0
+         }
+        },
+        "kind": {
+         "enum": [
+          "ankan",
+          "minkan",
+          "kakan"
+         ]
+        },
+        "open": {
+         "type": "boolean"
+        },
+        "reason": {
+         "type": "string"
+        },
+        "values": {
+         "type": "object"
+        }
+       }
+      }
+     },
+     "estimates": {
+      "type": "object"
+     },
+     "best": {
+      "type": "integer",
+      "minimum": 0
+     },
+     "loss": {
+      "type": "number",
+      "minimum": 0
+     },
+     "verdict": {
+      "enum": [
+       "o",
+       "d",
+       "x"
+      ]
+     },
+     "note": {
+      "type": [
+       "string",
+       "null"
+      ]
+     }
+    }
+   }
+  }
+ },
+ "required": [
+  "format",
+  "version",
+  "id",
+  "record",
+  "evaluator",
+  "points"
+ ]
+}

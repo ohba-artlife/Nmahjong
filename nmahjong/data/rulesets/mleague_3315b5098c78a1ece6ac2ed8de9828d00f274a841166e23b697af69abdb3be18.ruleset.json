@@ -1,0 +1,263 @@
+{
+ "format": "nmahjong-ruleset",
+ "version": "1.0",
+ "name": "mleague",
+ "tileset": {
+  "name": "mpsz",
+  "id": "sha256:a42613018724ca161585b15bae544fb4f8cb477a64efb3f944b0acb3d913db04"
+ },
+ "players": 4,
+ "hand_size": 13,
+ "length": "east_south",
+ "winds": [
+  "E",
+  "S",
+  "W",
+  "N"
+ ],
+ "unknown": [
+  "end.extension"
+ ],
+ "meta": {
+  "source": [
+   "https://m-league.jp/about/",
+   "https://janten.net/guide/m-league-rules",
+   "https://p.eagate.573.jp/game/mfc/mfc_sp/howto/mode/mleague/index.html"
+  ],
+  "note": "Mリーグ：赤 3、一発裏カン、途中流局なし、頭ハネ、流し満貫なし、トビなし、和了止め・聴牌止めなし、数え役満なし（11 翻以上は三倍満）、役満の複合あり（役満 1 種での二倍役満はなし）、包（大三元・大四喜・四槓子）、0 点・マイナスでも立直可、切り上げ満貫、順位点 50/10/−10/−30（オカ込み）、チョンボ −20P"
+ },
+ "wall_rules": {
+  "deal": "N_each_then_1_to_dealer",
+  "dead_wall": 14,
+  "dora_indicator": [
+   8
+  ],
+  "ura_indicator": [
+   9
+  ],
+  "kan_dora": [
+   6,
+   4,
+   2,
+   0
+  ],
+  "kan_ura": [
+   7,
+   5,
+   3,
+   1
+  ],
+  "rinshan": [
+   12,
+   13,
+   10,
+   11
+  ],
+  "break": {
+   "by": "dice"
+  }
+ },
+ "game_rules": {
+  "agari_form": "standard",
+  "marks": {
+   "red": {
+    "effects": [
+     "dora"
+    ]
+   }
+  },
+  "mark_overrides": [],
+  "dora": {
+   "indicator": true,
+   "ura": true,
+   "kan": true,
+   "kan_ura": true,
+   "kan_timing": {
+    "ankan": "immediate",
+    "minkan": "after_discard",
+    "kakan": "after_discard"
+   },
+   "values": {
+    "indicator": 1,
+    "ura": 1,
+    "kan": 1,
+    "kan_ura": 1
+   }
+  },
+  "nuki": {
+   "enabled": false
+  },
+  "yaku": {
+   "base": "riichi-standard",
+   "overrides": {},
+   "chiitoi_four_of_kind": false
+  },
+  "nagashi_mangan": {
+   "enabled": false
+  },
+  "pao": {
+   "yakuman": [
+    "daisangen",
+    "daisuushii",
+    "suukantsu"
+   ],
+   "tsumo": "full",
+   "ron": "split",
+   "honba_kyotaku": "discarder",
+   "daiminkan_rinshan": false
+  },
+  "flow": {
+   "open_tanyao": true,
+   "atozuke": "allowed",
+   "kuikae": "forbidden",
+   "chi": true,
+   "ippatsu": true,
+   "riichi": {
+    "min_points": 1000,
+    "below_min": "allowed",
+    "without_draw": true,
+    "on_houtei": true,
+    "furiten_riichi": true,
+    "ankan_after": "if_shape_unchanged",
+    "stick_at_end": "stays",
+    "stick_if_ronned": false
+   },
+   "open_riichi": {
+    "enabled": false
+   },
+   "renchan": {
+    "dealer_win": true,
+    "dealer_tenpai": true,
+    "all_noten": false,
+    "draw": false,
+    "by_bakaze": {}
+   },
+   "renchan_on_abort": true,
+   "ryukyoku": {
+    "nine_terminals": false,
+    "four_winds": false,
+    "four_kans": false,
+    "four_riichi": false,
+    "three_ron": false
+   },
+   "double_ron": false,
+   "triple_ron": "head",
+   "kyotaku_to": "kamicha",
+   "wareme": false,
+   "kokushi_ankan_chankan": false,
+   "ryuuiisou_requires_hatsu": false,
+   "chuuren_any_suit": true,
+   "max_kans": 4,
+   "pon": true,
+   "kan_kinds": [
+    "ankan",
+    "minkan",
+    "kakan"
+   ],
+   "max_kans_per_player": null
+  },
+  "scoring": {
+   "table": "standard",
+   "honba_points": 300,
+   "kyotaku_points": 1000,
+   "noten_penalty": 3000,
+   "mangan_round_up": true,
+   "round_to": 100,
+   "fu": {
+    "enabled": true,
+    "double_wind_pair": 2,
+    "rinshan_tsumo_fu": 2,
+    "chiitoi": "25fu_2han",
+    "open_pinfu_fu": 30,
+    "menzen_tsumo_pinfu": true,
+    "yakuhai_tanki_fu": 0
+   },
+   "limits": {
+    "sanbaiman_from": 11,
+    "kazoe_from": null,
+    "yakuman_base": 4,
+    "max_multiple": 6,
+    "stack_with_normal": false
+   },
+   "shibari": {
+    "from_honba": null,
+    "han": 2,
+    "exclude_dora": true
+   },
+   "tsumo_loss": "none",
+   "payment": "standard"
+  },
+  "penalties": {
+   "chombo": {
+    "kind": "rank_points",
+    "value": 20,
+    "replay": true,
+    "honba_increase": false
+   },
+   "false_call": {
+    "kind": "agari_houki"
+   },
+   "noten_riichi": "chombo"
+  }
+ },
+ "end": {
+  "tobi": {
+   "enabled": false
+  },
+  "negative_points": "continue",
+  "cold_points": null,
+  "time_limit_sec": null,
+  "extension": {
+   "enabled": false
+  },
+  "agari_yame": {
+   "enabled": false
+  },
+  "tenpai_yame": {
+   "enabled": false
+  },
+  "max_honba": null
+ },
+ "settlement": {
+  "start_points": 25000,
+  "return_points": 30000,
+  "unit": {
+   "name": "pt",
+   "points_per_unit": 1000,
+   "decimals": 1
+  },
+  "uma": [
+   30,
+   10,
+   -10,
+   -30
+  ],
+  "oka": "to_first",
+  "tie": "split",
+  "dealer_takes_all": false,
+  "chips": [],
+  "yakitori": {
+   "enabled": false
+  },
+  "external_points": [
+   {
+    "system": "mleague-p",
+    "kind": "rank_plus_raw",
+    "raw_base": 30000,
+    "raw_divisor": 1000,
+    "rank_points": [
+     50,
+     10,
+     -10,
+     -30
+    ]
+   }
+  ],
+  "payout": null,
+  "rounding": {
+   "score_to_1000": "none",
+   "remainder_to_top": false
+  }
+ },
+ "id": "sha256:3315b5098c78a1ece6ac2ed8de9828d00f274a841166e23b697af69abdb3be18"
+}

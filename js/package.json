@@ -1,0 +1,9 @@
+{
+  "name": "nmahjong",
+  "version": "1.0.0",
+  "description": "Data formats for N-tile mahjong: second implementation (JavaScript, no dependencies)",
+  "main": "nmahjong.js",
+  "scripts": { "test": "node test.js && node test_game.js" },
+  "license": "MIT",
+  "private": true
+}

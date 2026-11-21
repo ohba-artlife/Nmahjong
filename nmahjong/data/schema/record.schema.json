@@ -1,0 +1,550 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://nmahjong.dev/schema/record.schema.json",
+ "title": "Nmahjong record 1.0",
+ "type": "object",
+ "additionalProperties": false,
+ "properties": {
+  "format": {
+   "const": "nmahjong-record"
+  },
+  "version": {
+   "const": "1.0"
+  },
+  "id": {
+   "type": "string",
+   "pattern": "^sha256:[0-9a-f]{64}$"
+  },
+  "source": {
+   "type": "object",
+   "required": [
+    "kind",
+    "from"
+   ],
+   "properties": {
+    "kind": {
+     "enum": [
+      "played",
+      "imported",
+      "replayed",
+      "generated"
+     ]
+    },
+    "from": {
+     "type": "string"
+    },
+    "ref": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   }
+  },
+  "ruleset": {
+   "type": "object",
+   "required": [
+    "id"
+   ],
+   "properties": {
+    "name": {
+     "type": "string"
+    },
+    "id": {
+     "type": "string",
+     "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+   }
+  },
+  "players": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "required": [
+     "seat"
+    ],
+    "properties": {
+     "seat": {
+      "type": "integer",
+      "minimum": 0
+     },
+     "name": {
+      "type": "string"
+     },
+     "external": {
+      "type": "array"
+     },
+     "ranks": {
+      "type": "array"
+     },
+     "rating": {
+      "type": "object"
+     }
+    }
+   }
+  },
+  "end": {
+   "enum": [
+    "finished",
+    "aborted",
+    "tobi",
+    "cold",
+    "time_limit",
+    "in_progress"
+   ]
+  },
+  "parent": {
+   "type": [
+    "null",
+    "object"
+   ]
+  },
+  "started_at": {
+   "type": "string"
+  },
+  "ended_at": {
+   "type": "string"
+  },
+  "rounds": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "required": [
+     "index",
+     "wall",
+     "state",
+     "events",
+     "result"
+    ],
+    "properties": {
+     "index": {
+      "type": "integer",
+      "minimum": 0
+     },
+     "wall": {
+      "oneOf": [
+       {
+        "type": "null"
+       },
+       {
+        "type": "object",
+        "required": [
+         "id"
+        ],
+        "properties": {
+         "name": {
+          "type": "string"
+         },
+         "id": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+         }
+        }
+       }
+      ]
+     },
+     "state": {
+      "type": "object",
+      "required": [
+       "bakaze",
+       "kyoku",
+       "honba",
+       "kyotaku",
+       "oya",
+       "scores"
+      ],
+      "properties": {
+       "bakaze": {
+        "enum": [
+         "E",
+         "S",
+         "W",
+         "N"
+        ]
+       },
+       "kyoku": {
+        "type": "integer",
+        "minimum": 1
+       },
+       "honba": {
+        "type": "integer",
+        "minimum": 0
+       },
+       "kyotaku": {
+        "type": "integer",
+        "minimum": 0
+       },
+       "oya": {
+        "type": "integer",
+        "minimum": 0
+       },
+       "scores": {
+        "type": "array",
+        "items": {
+         "type": "integer"
+        }
+       },
+       "dice": {
+        "type": "array",
+        "items": {
+         "type": "integer",
+         "minimum": 1,
+         "maximum": 6
+        }
+       }
+      }
+     },
+     "events": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+       "type": "object",
+       "required": [
+        "t"
+       ],
+       "properties": {
+        "t": {
+         "enum": [
+          "abort",
+          "chi",
+          "chombo",
+          "deal",
+          "discard",
+          "dora",
+          "draw",
+          "draw_end",
+          "kan",
+          "nuki",
+          "pon",
+          "riichi",
+          "win"
+         ]
+        },
+        "who": {
+         "type": "integer",
+         "minimum": 0
+        },
+        "from": {
+         "type": "integer",
+         "minimum": 0
+        },
+        "tile": {
+         "type": "integer",
+         "minimum": 0
+        },
+        "tiles": {
+         "type": "array",
+         "items": {
+          "type": "integer",
+          "minimum": 0
+         }
+        },
+        "kind": {
+         "type": "string"
+        },
+        "tsumogiri": {
+         "type": "boolean"
+        },
+        "riichi": {
+         "type": "boolean"
+        },
+        "open": {},
+        "rinshan": {
+         "type": "boolean"
+        },
+        "reason": {
+         "type": "string"
+        },
+        "resume": {
+         "type": "boolean"
+        },
+        "hands": {
+         "type": "array",
+         "items": {
+          "type": "array",
+          "items": {
+           "type": "integer",
+           "minimum": 0
+          }
+         }
+        },
+        "at": {
+         "type": "string"
+        }
+       }
+      }
+     },
+     "result": {
+      "type": [
+       "object",
+       "null"
+      ],
+      "properties": {
+       "wins": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "required": [
+          "who",
+          "from",
+          "tile",
+          "hand",
+          "yaku",
+          "fu",
+          "han",
+          "points",
+          "deltas"
+         ],
+         "properties": {
+          "who": {
+           "type": "integer"
+          },
+          "from": {
+           "type": "integer"
+          },
+          "tile": {
+           "type": [
+            "integer",
+            "null"
+           ]
+          },
+          "hand": {
+           "type": "array",
+           "items": {
+            "type": "integer",
+            "minimum": 0
+           }
+          },
+          "melds": {
+           "type": "array",
+           "items": {
+            "type": "object",
+            "required": [
+             "kind",
+             "tiles"
+            ],
+            "properties": {
+             "kind": {
+              "enum": [
+               "chi",
+               "pon",
+               "ankan",
+               "minkan",
+               "kakan",
+               "nuki"
+              ]
+             },
+             "tiles": {
+              "type": "array",
+              "items": {
+               "type": "integer",
+               "minimum": 0
+              }
+             },
+             "from": {
+              "type": "integer"
+             }
+            }
+           }
+          },
+          "yaku": {
+           "type": "array",
+           "items": {
+            "type": "object",
+            "required": [
+             "name"
+            ],
+            "properties": {
+             "name": {
+              "type": "string"
+             },
+             "han": {
+              "type": "integer"
+             },
+             "yakuman": {
+              "type": "integer"
+             }
+            }
+           }
+          },
+          "fu": {
+           "type": "integer"
+          },
+          "han": {
+           "type": "integer"
+          },
+          "yakuman": {
+           "type": "integer"
+          },
+          "points": {
+           "type": "integer"
+          },
+          "ura_indicators": {
+           "type": "array",
+           "items": {
+            "type": "integer",
+            "minimum": 0
+           }
+          },
+          "deltas": {
+           "type": "array",
+           "items": {
+            "type": "integer"
+           }
+          },
+          "chips": {
+           "type": "array"
+          },
+          "pao": {
+           "type": "integer"
+          },
+          "reverse": {
+           "type": "boolean"
+          },
+          "additive": {
+           "type": "object",
+           "additionalProperties": false,
+           "required": [
+            "han",
+            "yakuman",
+            "base",
+            "dealer",
+            "honba",
+            "karasu",
+            "each"
+           ],
+           "properties": {
+            "han": {
+             "type": "integer",
+             "minimum": 0
+            },
+            "yakuman": {
+             "type": "integer",
+             "minimum": 0
+            },
+            "base": {
+             "type": "integer",
+             "minimum": 0
+            },
+            "dealer": {
+             "type": "integer",
+             "minimum": 0
+            },
+            "honba": {
+             "type": "integer",
+             "minimum": 0
+            },
+            "karasu": {
+             "type": "integer",
+             "minimum": 0
+            },
+            "each": {
+             "type": "integer",
+             "minimum": 0
+            }
+           }
+          }
+         }
+        }
+       },
+       "draw": {
+        "oneOf": [
+         {
+          "type": "null"
+         },
+         {
+          "type": "object",
+          "required": [
+           "reason",
+           "deltas"
+          ],
+          "properties": {
+           "reason": {
+            "enum": [
+             "exhaustive",
+             "nine_terminals",
+             "four_winds",
+             "four_kans",
+             "four_riichi",
+             "three_ron",
+             "nagashi_mangan"
+            ]
+           },
+           "tenpai": {
+            "type": "array"
+           },
+           "hands": {
+            "type": "array"
+           },
+           "deltas": {
+            "type": "array",
+            "items": {
+             "type": "integer"
+            }
+           }
+          }
+         }
+        ]
+       },
+       "scores": {
+        "type": "array",
+        "items": {
+         "type": "integer"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "final": {
+   "type": "object",
+   "required": [
+    "scores",
+    "rank",
+    "settled"
+   ],
+   "properties": {
+    "scores": {
+     "type": "array",
+     "items": {
+      "type": "integer"
+     }
+    },
+    "rank": {
+     "type": "array",
+     "items": {
+      "type": "integer",
+      "minimum": 1
+     }
+    },
+    "settled": {
+     "type": "array",
+     "items": {
+      "type": "number"
+     }
+    },
+    "chips": {
+     "type": "array"
+    },
+    "external_points": {
+     "type": "array"
+    }
+   }
+  },
+  "meta": {
+   "type": "object"
+  }
+ },
+ "required": [
+  "format",
+  "version",
+  "id",
+  "source",
+  "ruleset",
+  "players",
+  "end",
+  "rounds",
+  "final"
+ ]
+}

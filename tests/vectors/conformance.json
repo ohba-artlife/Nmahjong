@@ -1,0 +1,635 @@
+{
+ "format": "nmahjong-conformance-vectors",
+ "version": "1.0",
+ "note": "参照実装（Python）から tools/gen_vectors.py で作る。手で編集しない。説明は docs/conformance.md",
+ "canonical_json": [
+  {
+   "value": {},
+   "canonical": "{}",
+   "id": "sha256:44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+  },
+  {
+   "value": [],
+   "canonical": "[]",
+   "id": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  {
+   "value": {
+    "b": 1,
+    "a": 2
+   },
+   "canonical": "{\"a\":2,\"b\":1}",
+   "id": "sha256:d3626ac30a87e6f7a6428233b3c68299976865fa5508e4267c5415c76af7a772"
+  },
+  {
+   "value": {
+    "a": [
+     3,
+     2,
+     1
+    ],
+    "b": {
+     "d": null,
+     "c": true
+    }
+   },
+   "canonical": "{\"a\":[3,2,1],\"b\":{\"c\":true,\"d\":null}}",
+   "id": "sha256:d86f91f08b24f1db5459aef38f5f6e5310f42623aa07feeceb2c7926dafed9c3"
+  },
+  {
+   "value": {
+    "n": 1.0,
+    "m": -2.0,
+    "x": 1.5,
+    "z": 0
+   },
+   "canonical": "{\"m\":-2,\"n\":1,\"x\":1.5,\"z\":0}",
+   "id": "sha256:3ad08f2a7db3bd3a2ffbd850ba37f5ac614802ab98cc66a1e0fad2abeda48d34"
+  },
+  {
+   "value": {
+    "name": "東風戦",
+    "tiles": [
+     "1m",
+     "中"
+    ]
+   },
+   "canonical": "{\"name\":\"東風戦\",\"tiles\":[\"1m\",\"中\"]}",
+   "id": "sha256:31608061fde3703e743ee4e16b7faf8dbbb19519b7b0657ab6b21095b1c8e214"
+  },
+  {
+   "value": {
+    "s": "a\"b\\c\n",
+    "t": ""
+   },
+   "canonical": "{\"s\":\"a\\\"b\\\\c\\n\",\"t\":\"\"}",
+   "id": "sha256:d8c42522ee9af05e661c59baac6f2e91063282c5b334fe007e390b46f3e7440a"
+  },
+  {
+   "value": [
+    {
+     "id": 0,
+     "kind": "1m"
+    },
+    {
+     "id": 1,
+     "kind": "1m",
+     "mark": "red"
+    }
+   ],
+   "canonical": "[{\"id\":0,\"kind\":\"1m\"},{\"id\":1,\"kind\":\"1m\",\"mark\":\"red\"}]",
+   "id": "sha256:80f343b2af4015b80ea203557bf6396f5f586c32eca53cdef42f947e9dbce357"
+  },
+  {
+   "value": {
+    "nested": {
+     "deep": {
+      "list": [
+       1,
+       [
+        2,
+        [
+         3,
+         {
+          "k": false
+         }
+        ]
+       ]
+      ]
+     }
+    }
+   },
+   "canonical": "{\"nested\":{\"deep\":{\"list\":[1,[2,[3,{\"k\":false}]]]}}}",
+   "id": "sha256:d5158a3a892b9fedfcdd0d7f8a9f97b855c1c6aa13c12e18a6348fc2220d18a3"
+  }
+ ],
+ "fy_sha256_v1": [
+  {
+   "n": 1,
+   "seed": "a",
+   "sha256_of_bytes": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+   "order": [
+    0
+   ]
+  },
+  {
+   "n": 2,
+   "seed": "a",
+   "sha256_of_bytes": "b413f47d13ee2fe6c845b2ee141af81de858df4ec549a58b7970bb96645bc8d2",
+   "order": [
+    0,
+    1
+   ]
+  },
+  {
+   "n": 10,
+   "seed": "a",
+   "sha256_of_bytes": "19de28b7c93aa8db42ef56b3ef6467ca1eb552d5a3bd68f5d7fd1cc53d98f150",
+   "order": [
+    1,
+    3,
+    7,
+    8,
+    2,
+    0,
+    9,
+    4,
+    6,
+    5
+   ]
+  },
+  {
+   "n": 10,
+   "seed": "b",
+   "sha256_of_bytes": "a068ef9d38e7df4dbdc47ca7fa6b6284dee176e6d8f3e5a020bca46524e95eca",
+   "order": [
+    7,
+    0,
+    6,
+    3,
+    5,
+    9,
+    4,
+    2,
+    8,
+    1
+   ]
+  },
+  {
+   "n": 136,
+   "seed": "2026-11-11T10:00:00+09:00",
+   "sha256_of_bytes": "d78d5797ce2fd33d5e9a9aaa6adafd0a439169778c3c34b27b97c12473788931",
+   "head": [
+    111,
+    48,
+    119,
+    67,
+    76,
+    94,
+    38,
+    1
+   ]
+  },
+  {
+   "n": 256,
+   "seed": "max",
+   "sha256_of_bytes": "fe93a5a05486bf7c91044819904b86281c83dcef2de0056b2606475421ac05c0",
+   "head": [
+    152,
+    166,
+    182,
+    66,
+    228,
+    139,
+    210,
+    30
+   ]
+  }
+ ],
+ "tilesets": [
+  {
+   "file": "nmahjong/data/tilesets/m_476f3545ded25456ce9bc392fbc10dc234728f61b16010b14caee92fb1811ecd.tileset.json",
+   "name": "m",
+   "K": 36,
+   "id": "sha256:476f3545ded25456ce9bc392fbc10dc234728f61b16010b14caee92fb1811ecd"
+  },
+  {
+   "file": "nmahjong/data/tilesets/m_a791d2ba3285d1dd3f843b603eaaad65901b2c06e508e05990648b4dc90ef44b.tileset.json",
+   "name": "m",
+   "K": 36,
+   "id": "sha256:a791d2ba3285d1dd3f843b603eaaad65901b2c06e508e05990648b4dc90ef44b"
+  },
+  {
+   "file": "nmahjong/data/tilesets/mps_09aebf0d52e66ffe2f1dc98c681c9218dc6a07e945602e265af3af0f4c012fbc.tileset.json",
+   "name": "mps",
+   "K": 108,
+   "id": "sha256:09aebf0d52e66ffe2f1dc98c681c9218dc6a07e945602e265af3af0f4c012fbc"
+  },
+  {
+   "file": "nmahjong/data/tilesets/mpsz-e8_ae2dc241a82884b66e166d9a2c5deaafbd80356b6b97bc162ca2e8afe82feae1.tileset.json",
+   "name": "mpsz-e8",
+   "K": 144,
+   "id": "sha256:ae2dc241a82884b66e166d9a2c5deaafbd80356b6b97bc162ca2e8afe82feae1"
+  },
+  {
+   "file": "nmahjong/data/tilesets/mpsz-x28_0ab7340460b78e3ff9e9444395c7e9b9370f5b4f02083cefd094f0c9df0cefb7.tileset.json",
+   "name": "mpsz-x28",
+   "K": 108,
+   "id": "sha256:0ab7340460b78e3ff9e9444395c7e9b9370f5b4f02083cefd094f0c9df0cefb7"
+  },
+  {
+   "file": "nmahjong/data/tilesets/mpsz-x28_5b8c5f68ce9e13fab6839a7dcfdfc4db12879c114976e5325586e4dc7a728606.tileset.json",
+   "name": "mpsz-x28",
+   "K": 108,
+   "id": "sha256:5b8c5f68ce9e13fab6839a7dcfdfc4db12879c114976e5325586e4dc7a728606"
+  },
+  {
+   "file": "nmahjong/data/tilesets/mpsz-x28_c35da28d260d55714bc05342b21c27e671a54234e10a435a934dec70d9cb9e04.tileset.json",
+   "name": "mpsz-x28",
+   "K": 108,
+   "id": "sha256:c35da28d260d55714bc05342b21c27e671a54234e10a435a934dec70d9cb9e04"
+  },
+  {
+   "file": "nmahjong/data/tilesets/mpsz_20763f9e589821262daceb0c9a9d863cc30aef989335a09eceb4a1fffc355e1b.tileset.json",
+   "name": "mpsz",
+   "K": 136,
+   "id": "sha256:20763f9e589821262daceb0c9a9d863cc30aef989335a09eceb4a1fffc355e1b"
+  },
+  {
+   "file": "nmahjong/data/tilesets/mpsz_87f888e48259f4c2d339153df17d32db7ba9e1bcd9f9fef774c2159ca82e2c4d.tileset.json",
+   "name": "mpsz",
+   "K": 136,
+   "id": "sha256:87f888e48259f4c2d339153df17d32db7ba9e1bcd9f9fef774c2159ca82e2c4d"
+  },
+  {
+   "file": "nmahjong/data/tilesets/mpsz_a42613018724ca161585b15bae544fb4f8cb477a64efb3f944b0acb3d913db04.tileset.json",
+   "name": "mpsz",
+   "K": 136,
+   "id": "sha256:a42613018724ca161585b15bae544fb4f8cb477a64efb3f944b0acb3d913db04"
+  }
+ ],
+ "walls": [
+  {
+   "tileset": {
+    "name": "mpsz",
+    "id": "sha256:a42613018724ca161585b15bae544fb4f8cb477a64efb3f944b0acb3d913db04"
+   },
+   "seed": "2026-11-11T10:00:00+09:00",
+   "head": [
+    111,
+    48,
+    119,
+    67,
+    76,
+    94,
+    38,
+    1
+   ],
+   "tail": [
+    16,
+    11,
+    60,
+    106
+   ],
+   "sha256_of_bytes": "d78d5797ce2fd33d5e9a9aaa6adafd0a439169778c3c34b27b97c12473788931",
+   "id": "sha256:3fa2bbc6c633c1a4dbb05b1c2e7258a6c0119829dcebd9e035c89b8a15c07f1c"
+  },
+  {
+   "tileset": {
+    "name": "mpsz",
+    "id": "sha256:20763f9e589821262daceb0c9a9d863cc30aef989335a09eceb4a1fffc355e1b"
+   },
+   "seed": "2026-11-11T10:00:00+09:00",
+   "head": [
+    111,
+    48,
+    119,
+    67,
+    76,
+    94,
+    38,
+    1
+   ],
+   "tail": [
+    16,
+    11,
+    60,
+    106
+   ],
+   "sha256_of_bytes": "d78d5797ce2fd33d5e9a9aaa6adafd0a439169778c3c34b27b97c12473788931",
+   "id": "sha256:c5e7fd8fdd4786d99711bcbca771f397f030d678ba70dd9dd178d55917ec316a"
+  },
+  {
+   "tileset": {
+    "name": "mpsz-x28",
+    "id": "sha256:0ab7340460b78e3ff9e9444395c7e9b9370f5b4f02083cefd094f0c9df0cefb7"
+   },
+   "seed": "sanma-1",
+   "head": [
+    100,
+    91,
+    26,
+    71,
+    6,
+    31,
+    76,
+    54
+   ],
+   "tail": [
+    70,
+    86,
+    0,
+    89
+   ],
+   "sha256_of_bytes": "dff5f94b760cb6fbb7f0f9e09ff77fd86f30dd1cafbadd9002735efdfc21aa91",
+   "id": "sha256:40f4bfd28f412c159a83d568c59bc7d58de7ebb051b7ea8cbcf830194217cee1"
+  },
+  {
+   "tileset": {
+    "name": "mps",
+    "id": "sha256:09aebf0d52e66ffe2f1dc98c681c9218dc6a07e945602e265af3af0f4c012fbc"
+   },
+   "seed": "seed with spaces",
+   "head": [
+    18,
+    51,
+    75,
+    81,
+    107,
+    66,
+    83,
+    96
+   ],
+   "tail": [
+    98,
+    82,
+    47,
+    80
+   ],
+   "sha256_of_bytes": "ad7eadb08b3c03ee1348f5252942ca9fded879d72ebad15671c4e711dbfde7fa",
+   "id": "sha256:f437d22ff6ed91bab8dc5f1f693ebb9110c80b53d822c9d933e43fec65658712"
+  },
+  {
+   "tileset": {
+    "name": "m",
+    "id": "sha256:476f3545ded25456ce9bc392fbc10dc234728f61b16010b14caee92fb1811ecd"
+   },
+   "seed": "種",
+   "head": [
+    13,
+    3,
+    27,
+    1,
+    35,
+    11,
+    9,
+    23
+   ],
+   "tail": [
+    29,
+    2,
+    30,
+    12
+   ],
+   "sha256_of_bytes": "a551848799174ccf5afcc0cd503cdf12178b92025e631d11253dd67ddd96a7e9",
+   "id": "sha256:a388ab3940bc45357bd206008a44b0fb9aa918fa362ddaba6aa50b865769b9d8"
+  },
+  {
+   "tileset": {
+    "name": "mpsz-e8",
+    "id": "sha256:ae2dc241a82884b66e166d9a2c5deaafbd80356b6b97bc162ca2e8afe82feae1"
+   },
+   "seed": "2026-01-01T00:00:00Z",
+   "head": [
+    61,
+    124,
+    101,
+    37,
+    0,
+    82,
+    89,
+    33
+   ],
+   "tail": [
+    108,
+    93,
+    140,
+    98
+   ],
+   "sha256_of_bytes": "3c23e0c23e29a6e262d43d6f846b0ccd684f1ec1b0cfb4773fabde5169edb0ac",
+   "id": "sha256:f2e1693e0f7c56962e7ab69607d92fdebbb5090e04f6d01eb5a604628dbdd9fc"
+  }
+ ],
+ "rulesets": [
+  {
+   "file": "nmahjong/data/rulesets/jantama-4p-tonpu_5a38347df07ac283cdf1cb2c3b87e8f97c0ed4e9563576ef245a60d77e137336.ruleset.json",
+   "name": "jantama-4p-tonpu",
+   "id": "sha256:5a38347df07ac283cdf1cb2c3b87e8f97c0ed4e9563576ef245a60d77e137336"
+  },
+  {
+   "file": "nmahjong/data/rulesets/jantama-4p_e09fc63d9abcd9ff9496833fb24c2f720c238775717f2242734e9fe182f20742.ruleset.json",
+   "name": "jantama-4p",
+   "id": "sha256:e09fc63d9abcd9ff9496833fb24c2f720c238775717f2242734e9fe182f20742"
+  },
+  {
+   "file": "nmahjong/data/rulesets/jpml-official_23c5d5b47352da86ceb40767a05e1ef778ee2ec50fd87691d4a45a1d7db29163.ruleset.json",
+   "name": "jpml-official",
+   "id": "sha256:23c5d5b47352da86ceb40767a05e1ef778ee2ec50fd87691d4a45a1d7db29163"
+  },
+  {
+   "file": "nmahjong/data/rulesets/jpml-wrc-r_bb0d6218a6ec85979d980c6d9259af88116d7c84f830a62ac4d9ba23bafe2a9f.ruleset.json",
+   "name": "jpml-wrc-r",
+   "id": "sha256:bb0d6218a6ec85979d980c6d9259af88116d7c84f830a62ac4d9ba23bafe2a9f"
+  },
+  {
+   "file": "nmahjong/data/rulesets/jpml-wrc_457a552f8c1e6490aece767475e7d34192a1200a17bef830dcb1f1c8bffc2351.ruleset.json",
+   "name": "jpml-wrc",
+   "id": "sha256:457a552f8c1e6490aece767475e7d34192a1200a17bef830dcb1f1c8bffc2351"
+  },
+  {
+   "file": "nmahjong/data/rulesets/kansai-3p_1fc5a76247beb9e9874d3c67b9d0919f83ce03e3deaf437677bda62f586d226a.ruleset.json",
+   "name": "kansai-3p",
+   "id": "sha256:1fc5a76247beb9e9874d3c67b9d0919f83ce03e3deaf437677bda62f586d226a"
+  },
+  {
+   "file": "nmahjong/data/rulesets/kenko_bba72d18335bee9df8f227b791383fe262d7367917dcd86b9cda409b1ba22021.ruleset.json",
+   "name": "kenko",
+   "id": "sha256:bba72d18335bee9df8f227b791383fe262d7367917dcd86b9cda409b1ba22021"
+  },
+  {
+   "file": "nmahjong/data/rulesets/marchao-3p_2880e8d16776048c204b89a099e4c551cc883afa5b60ab157f2dcdba7323c7e6.ruleset.json",
+   "name": "marchao-3p",
+   "id": "sha256:2880e8d16776048c204b89a099e4c551cc883afa5b60ab157f2dcdba7323c7e6"
+  },
+  {
+   "file": "nmahjong/data/rulesets/marchao-4p_c01493132ff1a15ea68055e94d6d75837b945fa1730e9d57277e2cc5529a781c.ruleset.json",
+   "name": "marchao-4p",
+   "id": "sha256:c01493132ff1a15ea68055e94d6d75837b945fa1730e9d57277e2cc5529a781c"
+  },
+  {
+   "file": "nmahjong/data/rulesets/mleague_3315b5098c78a1ece6ac2ed8de9828d00f274a841166e23b697af69abdb3be18.ruleset.json",
+   "name": "mleague",
+   "id": "sha256:3315b5098c78a1ece6ac2ed8de9828d00f274a841166e23b697af69abdb3be18"
+  },
+  {
+   "file": "nmahjong/data/rulesets/mu_8406964a336695d54269dc742e37be2e81f4cfd13ee6b32908f2dac62ac643ed.ruleset.json",
+   "name": "mu",
+   "id": "sha256:8406964a336695d54269dc742e37be2e81f4cfd13ee6b32908f2dac62ac643ed"
+  },
+  {
+   "file": "nmahjong/data/rulesets/nm-2p-1-m_c07450c7638ff74087747fc64688d291b01edbe59bc8458fb8a447e7a6236dde.ruleset.json",
+   "name": "nm-2p-1-m",
+   "id": "sha256:c07450c7638ff74087747fc64688d291b01edbe59bc8458fb8a447e7a6236dde"
+  },
+  {
+   "file": "nmahjong/data/rulesets/nm-2p-1-mps_4497920ab61af1974c465ffa11504f02fbc0435c52b64e8787a58d77f58b93ec.ruleset.json",
+   "name": "nm-2p-1-mps",
+   "id": "sha256:4497920ab61af1974c465ffa11504f02fbc0435c52b64e8787a58d77f58b93ec"
+  },
+  {
+   "file": "nmahjong/data/rulesets/nm-2p-1-mpsz_aad573a3ccc209b888e4cb0b64d02da31424f1f28410c1989461a73f5ab858f5.ruleset.json",
+   "name": "nm-2p-1-mpsz",
+   "id": "sha256:aad573a3ccc209b888e4cb0b64d02da31424f1f28410c1989461a73f5ab858f5"
+  },
+  {
+   "file": "nmahjong/data/rulesets/nm-2p-10-m_f393a3cfa05f340345d567bb40483fd90ecec7cbc796ff58863e15d131c19e4c.ruleset.json",
+   "name": "nm-2p-10-m",
+   "id": "sha256:f393a3cfa05f340345d567bb40483fd90ecec7cbc796ff58863e15d131c19e4c"
+  },
+  {
+   "file": "nmahjong/data/rulesets/nm-2p-10-mps_245c175a84ab90b7180bb9b085b2e78cfd8be4777923062e80f2f8a80dea9065.ruleset.json",
+   "name": "nm-2p-10-mps",
+   "id": "sha256:245c175a84ab90b7180bb9b085b2e78cfd8be4777923062e80f2f8a80dea9065"
+  },
+  {
+   "file": "nmahjong/data/rulesets/nm-2p-10-mpsz_135cb47c2fa604d92c2b079a328624d2e07b6da6e8d46514953ce3c7ceee528b.ruleset.json",
+   "name": "nm-2p-10-mpsz",
+   "id": "sha256:135cb47c2fa604d92c2b079a328624d2e07b6da6e8d46514953ce3c7ceee528b"
+  },
+  {
+   "file": "nmahjong/data/rulesets/nm-2p-13-m_cbf7c54924b52a4f5d211377d3c09b3f6f660873f44a91a0b767a65ec8437bce.ruleset.json",
+   "name": "nm-2p-13-m",
+   "id": "sha256:cbf7c54924b52a4f5d211377d3c09b3f6f660873f44a91a0b767a65ec8437bce"
+  },
+  {
+   "file": "nmahjong/data/rulesets/nm-2p-13-mps_75e53ba84535bb5de789a1971e15dfd262e755f192e1ed85a2df805725c3dc97.ruleset.json",
+   "name": "nm-2p-13-mps",
+   "id": "sha256:75e53ba84535bb5de789a1971e15dfd262e755f192e1ed85a2df805725c3dc97"
+  },
+  {
+   "file": "nmahjong/data/rulesets/nm-2p-13-mpsz_5aa4a51258bb54a1adbe244e9fbfc274521bcd807db0f47ddc30898e4c83a83c.ruleset.json",
+   "name": "nm-2p-13-mpsz",
+   "id": "sha256:5aa4a51258bb54a1adbe244e9fbfc274521bcd807db0f47ddc30898e4c83a83c"
+  },
+  {
+   "file": "nmahjong/data/rulesets/nm-2p-4-m_7d8ca726256d3f69da416129e3993edc439ab6f101ee9cdcc03a1d484b495eae.ruleset.json",
+   "name": "nm-2p-4-m",
+   "id": "sha256:7d8ca726256d3f69da416129e3993edc439ab6f101ee9cdcc03a1d484b495eae"
+  },
+  {
+   "file": "nmahjong/data/rulesets/nm-2p-4-mps_5dd7872205e34b48f43c05d1a165e2736b8b24c7762e637b44db85981f3b625a.ruleset.json",
+   "name": "nm-2p-4-mps",
+   "id": "sha256:5dd7872205e34b48f43c05d1a165e2736b8b24c7762e637b44db85981f3b625a"
+  },
+  {
+   "file": "nmahjong/data/rulesets/nm-2p-4-mpsz_4583043c20d9c3a1618b507f4b5b98321e5aee302cca48109ab7ac840fe30826.ruleset.json",
+   "name": "nm-2p-4-mpsz",
+   "id": "sha256:4583043c20d9c3a1618b507f4b5b98321e5aee302cca48109ab7ac840fe30826"
+  },
+  {
+   "file": "nmahjong/data/rulesets/nm-2p-4-room_123603377e537aa62c8a5e469149788968e8f586ddcf6328c14983915c048118.ruleset.json",
+   "name": "nm-2p-4-room",
+   "id": "sha256:123603377e537aa62c8a5e469149788968e8f586ddcf6328c14983915c048118"
+  },
+  {
+   "file": "nmahjong/data/rulesets/nm-2p-7-m_f1c2d158175173678c410bbb9177fc53552a3dfe881caf4a649422d9547bf6a3.ruleset.json",
+   "name": "nm-2p-7-m",
+   "id": "sha256:f1c2d158175173678c410bbb9177fc53552a3dfe881caf4a649422d9547bf6a3"
+  },
+  {
+   "file": "nmahjong/data/rulesets/nm-2p-7-mps_f6a17c6c6a64eb31bc58a3fb917e21b3b88d447bf90ec0ce12fa583c787287fd.ruleset.json",
+   "name": "nm-2p-7-mps",
+   "id": "sha256:f6a17c6c6a64eb31bc58a3fb917e21b3b88d447bf90ec0ce12fa583c787287fd"
+  },
+  {
+   "file": "nmahjong/data/rulesets/nm-2p-7-mpsz_448a3e6f88a1c196eb65a94c854415a1d13ef682b0a5b4f8fa33a351f991638c.ruleset.json",
+   "name": "nm-2p-7-mpsz",
+   "id": "sha256:448a3e6f88a1c196eb65a94c854415a1d13ef682b0a5b4f8fa33a351f991638c"
+  },
+  {
+   "file": "nmahjong/data/rulesets/npm_1d341d9d006b51b532ae28ed97a26269f33393a059e25ad5c1925d83104beeff.ruleset.json",
+   "name": "npm",
+   "id": "sha256:1d341d9d006b51b532ae28ed97a26269f33393a059e25ad5c1925d83104beeff"
+  },
+  {
+   "file": "nmahjong/data/rulesets/open-riichi-house_000f664b5129cca72946a478113a953bbcae9af16237a4974ec7cea6a3758785.ruleset.json",
+   "name": "open-riichi-house",
+   "id": "sha256:000f664b5129cca72946a478113a953bbcae9af16237a4974ec7cea6a3758785"
+  },
+  {
+   "file": "nmahjong/data/rulesets/pocchi-house_0e364c695da6137f62728cd36378a0f036ee19b0f27551a3146217ebdcfe5bc3.ruleset.json",
+   "name": "pocchi-house",
+   "id": "sha256:0e364c695da6137f62728cd36378a0f036ee19b0f27551a3146217ebdcfe5bc3"
+  },
+  {
+   "file": "nmahjong/data/rulesets/rmu-a_57bd41161d8b8780a38f048ce508bb419a17e8288689ba089b2a583b6f4f5fea.ruleset.json",
+   "name": "rmu-a",
+   "id": "sha256:57bd41161d8b8780a38f048ce508bb419a17e8288689ba089b2a583b6f4f5fea"
+  },
+  {
+   "file": "nmahjong/data/rulesets/rmu-b_11aab47adca09560fd6d36c15fb250852a993dc72ca5e1e9891104ae56731a04.ruleset.json",
+   "name": "rmu-b",
+   "id": "sha256:11aab47adca09560fd6d36c15fb250852a993dc72ca5e1e9891104ae56731a04"
+  },
+  {
+   "file": "nmahjong/data/rulesets/rmu-m_f3a8caf3bcd7c45221a4f06bf261c842a07f1f4e339bb8e79d5a1ebb984182b6.ruleset.json",
+   "name": "rmu-m",
+   "id": "sha256:f3a8caf3bcd7c45221a4f06bf261c842a07f1f4e339bb8e79d5a1ebb984182b6"
+  },
+  {
+   "file": "nmahjong/data/rulesets/saikouisen-classic_47e2d6d1d914d7510087cc9deee3de7a86e3035f3463b8c42dfb3da799421bb6.ruleset.json",
+   "name": "saikouisen-classic",
+   "id": "sha256:47e2d6d1d914d7510087cc9deee3de7a86e3035f3463b8c42dfb3da799421bb6"
+  },
+  {
+   "file": "nmahjong/data/rulesets/saikouisen_a1bbfa1ba873d5005766ecad4b68aa306462430527d55e1819644353e5461a0b.ruleset.json",
+   "name": "saikouisen",
+   "id": "sha256:a1bbfa1ba873d5005766ecad4b68aa306462430527d55e1819644353e5461a0b"
+  },
+  {
+   "file": "nmahjong/data/rulesets/sakae-shibuya_991911b377514c5847a7a15a17709b6474326d98954e165dc6a710d0b209b167.ruleset.json",
+   "name": "sakae-shibuya",
+   "id": "sha256:991911b377514c5847a7a15a17709b6474326d98954e165dc6a710d0b209b167"
+  },
+  {
+   "file": "nmahjong/data/rulesets/sports-mahjong_6fac9d43cd83067e30b907fc6641df30931bf1c215da8d1b8b570ad3c8f3a3f6.ruleset.json",
+   "name": "sports-mahjong",
+   "id": "sha256:6fac9d43cd83067e30b907fc6641df30931bf1c215da8d1b8b570ad3c8f3a3f6"
+  },
+  {
+   "file": "nmahjong/data/rulesets/tenhou-3p_e75033cd587f4fbb7eb4ac2a5b0026b0f3bb140947516b83ae3f80a1bb613c02.ruleset.json",
+   "name": "tenhou-3p",
+   "id": "sha256:e75033cd587f4fbb7eb4ac2a5b0026b0f3bb140947516b83ae3f80a1bb613c02"
+  },
+  {
+   "file": "nmahjong/data/rulesets/tenhou-4p-hanchan-red-exact_f0d8373123f964a32f1db39bba6a42e52ecee19f35d3e47a68e6c6d0f0140c20.ruleset.json",
+   "name": "tenhou-4p-hanchan-red-exact",
+   "id": "sha256:f0d8373123f964a32f1db39bba6a42e52ecee19f35d3e47a68e6c6d0f0140c20"
+  },
+  {
+   "file": "nmahjong/data/rulesets/tenhou-4p-hanchan-red_6e993d463e96f2f829f619f5af58f1221b49e77abf2dfb00b26db7f1bfeefa2b.ruleset.json",
+   "name": "tenhou-4p-hanchan-red",
+   "id": "sha256:6e993d463e96f2f829f619f5af58f1221b49e77abf2dfb00b26db7f1bfeefa2b"
+  },
+  {
+   "file": "nmahjong/data/rulesets/tenhou-4p-tonpu-red-exact_2db622b2d404a2607d7bdee4f357d40f255d2b667f9baa5b6916dd8a42a0331b.ruleset.json",
+   "name": "tenhou-4p-tonpu-red-exact",
+   "id": "sha256:2db622b2d404a2607d7bdee4f357d40f255d2b667f9baa5b6916dd8a42a0331b"
+  },
+  {
+   "file": "nmahjong/data/rulesets/tenhou-4p-tonpu-red_bd7812547fa6a8640efc1baed8230228d246c2d748b243400ac1f169269d073c.ruleset.json",
+   "name": "tenhou-4p-tonpu-red",
+   "id": "sha256:bd7812547fa6a8640efc1baed8230228d246c2d748b243400ac1f169269d073c"
+  },
+  {
+   "file": "nmahjong/data/rulesets/toutenkou-3p_56062fb4d3414461552d77ebc01990979fd18d47b806377be816b6529b8115ac.ruleset.json",
+   "name": "toutenkou-3p",
+   "id": "sha256:56062fb4d3414461552d77ebc01990979fd18d47b806377be816b6529b8115ac"
+  },
+  {
+   "file": "nmahjong/data/rulesets/wareme-de-pon_400f0686fdbc5cad36e5a810af0c7fbbcd08306c69c705a62dcd761f7734537e.ruleset.json",
+   "name": "wareme-de-pon",
+   "id": "sha256:400f0686fdbc5cad36e5a810af0c7fbbcd08306c69c705a62dcd761f7734537e"
+  },
+  {
+   "file": "nmahjong/data/rulesets/zoo-3p_8c8cac27fb1d37d40fa9b00a59cc2a81a9b609f3a439f00edd4c5de40883114a.ruleset.json",
+   "name": "zoo-3p",
+   "id": "sha256:8c8cac27fb1d37d40fa9b00a59cc2a81a9b609f3a439f00edd4c5de40883114a"
+  },
+  {
+   "file": "nmahjong/data/rulesets/zoo-4p_823f50a8868fcad211c6a23b5937b0752c63769a4f79c56b6639d3a210ffb91a.ruleset.json",
+   "name": "zoo-4p",
+   "id": "sha256:823f50a8868fcad211c6a23b5937b0752c63769a4f79c56b6639d3a210ffb91a"
+  }
+ ]
+}

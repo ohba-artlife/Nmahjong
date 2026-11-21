@@ -1,0 +1,1001 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://nmahjong.dev/schema/ruleset.schema.json",
+ "title": "Nmahjong ruleset 1.0（形だけ。既定値の補完・語彙・整合は validate が正）",
+ "type": "object",
+ "additionalProperties": false,
+ "properties": {
+  "format": {
+   "const": "nmahjong-ruleset"
+  },
+  "version": {
+   "const": "1.0"
+  },
+  "id": {
+   "type": "string",
+   "pattern": "^sha256:[0-9a-f]{64}$"
+  },
+  "name": {
+   "type": "string",
+   "pattern": "^[a-z0-9][a-z0-9-]*$"
+  },
+  "tileset": {
+   "type": "object",
+   "required": [
+    "id"
+   ],
+   "properties": {
+    "name": {
+     "type": "string"
+    },
+    "id": {
+     "type": "string",
+     "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+   }
+  },
+  "players": {
+   "type": "integer",
+   "minimum": 1
+  },
+  "hand_size": {
+   "type": "integer",
+   "minimum": 1
+  },
+  "length": {
+   "enum": [
+    "one",
+    "east",
+    "east_south",
+    "full",
+    "custom",
+    "endless"
+   ]
+  },
+  "rounds_total": {
+   "type": "integer",
+   "minimum": 1
+  },
+  "winds": {
+   "type": "array",
+   "items": {
+    "enum": [
+     "E",
+     "S",
+     "W",
+     "N"
+    ]
+   }
+  },
+  "wall_rules": {
+   "type": "object",
+   "additionalProperties": false,
+   "required": [
+    "deal",
+    "dead_wall",
+    "break"
+   ],
+   "properties": {
+    "deal": {
+     "enum": [
+      "N_each_then_1_to_dealer"
+     ]
+    },
+    "dead_wall": {
+     "type": "integer",
+     "minimum": 0
+    },
+    "dora_indicator": {
+     "type": "array",
+     "items": {
+      "type": "integer",
+      "minimum": 0
+     }
+    },
+    "ura_indicator": {
+     "type": "array",
+     "items": {
+      "type": "integer",
+      "minimum": 0
+     }
+    },
+    "kan_dora": {
+     "type": "array",
+     "items": {
+      "type": "integer"
+     }
+    },
+    "kan_ura": {
+     "type": "array",
+     "items": {
+      "type": "integer"
+     }
+    },
+    "rinshan": {
+     "oneOf": [
+      {
+       "const": "live"
+      },
+      {
+       "type": "array",
+       "items": {
+        "type": "integer"
+       }
+      }
+     ]
+    },
+    "rinshan_reserved": {
+     "type": "boolean"
+    },
+    "break": {
+     "type": "object",
+     "required": [
+      "by"
+     ],
+     "properties": {
+      "by": {
+       "enum": [
+        "dice",
+        "fixed",
+        "none"
+       ]
+      }
+     }
+    }
+   }
+  },
+  "game_rules": {
+   "type": "object",
+   "properties": {
+    "agari_form": {
+     "type": "string"
+    },
+    "marks": {
+     "type": "object"
+    },
+    "mark_overrides": {
+     "type": "array"
+    },
+    "dora": {
+     "type": "object",
+     "properties": {
+      "indicator": {
+       "type": "boolean"
+      },
+      "ura": {
+       "type": "boolean"
+      },
+      "kan": {
+       "type": "boolean"
+      },
+      "kan_ura": {
+       "type": "boolean"
+      },
+      "kan_timing": {
+       "type": "object",
+       "properties": {
+        "ankan": {
+         "type": "string"
+        },
+        "minkan": {
+         "type": "string"
+        },
+        "kakan": {
+         "type": "string"
+        }
+       },
+       "additionalProperties": false
+      },
+      "values": {
+       "type": "object",
+       "properties": {
+        "indicator": {
+         "type": "integer"
+        },
+        "ura": {
+         "type": "integer"
+        },
+        "kan": {
+         "type": "integer"
+        },
+        "kan_ura": {
+         "type": "integer"
+        }
+       },
+       "additionalProperties": false
+      }
+     },
+     "additionalProperties": false
+    },
+    "nuki": {
+     "type": "object",
+     "properties": {
+      "enabled": {
+       "type": "boolean"
+      },
+      "tiles": {
+       "type": "array"
+      },
+      "value": {
+       "type": "integer"
+      },
+      "as_yakuhai": {
+       "enum": [
+        "none",
+        "common",
+        "seat"
+       ]
+      },
+      "chan_nuki": {
+       "type": "boolean"
+      },
+      "win_with_nuki_in_hand": {
+       "type": "boolean"
+      },
+      "pao": {
+       "type": "boolean"
+      },
+      "forbid_keep": {
+       "type": "boolean"
+      }
+     },
+     "additionalProperties": false
+    },
+    "yaku": {
+     "type": "object",
+     "properties": {
+      "base": {
+       "enum": [
+        "riichi-standard",
+        "none"
+       ]
+      },
+      "overrides": {
+       "type": "object"
+      },
+      "chiitoi_four_of_kind": {
+       "type": "boolean"
+      },
+      "wheel": {
+       "enum": [
+        "2to8",
+        "any_suit"
+       ]
+      }
+     },
+     "additionalProperties": false
+    },
+    "nagashi_mangan": {
+     "type": "object",
+     "properties": {
+      "enabled": {
+       "type": "boolean"
+      },
+      "as": {
+       "type": "string"
+      },
+      "noten_penalty": {
+       "type": "boolean"
+      },
+      "renchan_if_dealer_tenpai": {
+       "type": "boolean"
+      }
+     },
+     "additionalProperties": false
+    },
+    "pao": {
+     "type": "object",
+     "properties": {
+      "yakuman": {
+       "type": "array",
+       "items": {
+        "type": "string"
+       }
+      },
+      "tsumo": {
+       "enum": [
+        "full"
+       ]
+      },
+      "ron": {
+       "enum": [
+        "split",
+        "split_all",
+        "full"
+       ]
+      },
+      "honba_kyotaku": {
+       "enum": [
+        "discarder",
+        "liable"
+       ]
+      },
+      "daiminkan_rinshan": {
+       "type": "boolean"
+      }
+     },
+     "additionalProperties": false
+    },
+    "flow": {
+     "type": "object",
+     "properties": {
+      "open_tanyao": {
+       "type": "boolean"
+      },
+      "atozuke": {
+       "enum": [
+        "allowed",
+        "forbidden",
+        "kanzen_sakizuke"
+       ]
+      },
+      "kuikae": {
+       "enum": [
+        "allowed",
+        "no_same_tile",
+        "forbidden"
+       ]
+      },
+      "chi": {
+       "type": "boolean"
+      },
+      "ippatsu": {
+       "type": "boolean"
+      },
+      "riichi": {
+       "type": "object",
+       "properties": {
+        "min_points": {
+         "type": "integer"
+        },
+        "below_min": {
+         "enum": [
+          "forbidden",
+          "allowed"
+         ]
+        },
+        "without_draw": {
+         "type": "boolean"
+        },
+        "on_houtei": {
+         "type": "boolean"
+        },
+        "furiten_riichi": {
+         "type": "boolean"
+        },
+        "ankan_after": {
+         "enum": [
+          "if_shape_unchanged",
+          "none",
+          "any"
+         ]
+        },
+        "stick_at_end": {
+         "enum": [
+          "stays",
+          "to_first"
+         ]
+        },
+        "stick_if_ronned": {
+         "type": "boolean"
+        }
+       },
+       "additionalProperties": false
+      },
+      "open_riichi": {
+       "type": "object",
+       "properties": {
+        "enabled": {
+         "type": "boolean"
+        },
+        "han_total": {
+         "type": "integer"
+        },
+        "deal_in": {
+         "enum": [
+          "yakuman",
+          "normal"
+         ]
+        },
+        "exempt_prior_riichi": {
+         "type": "boolean"
+        },
+        "chaser_pays": {
+         "type": "boolean"
+        },
+        "with_double_riichi_han": {
+         "type": "integer"
+        }
+       },
+       "additionalProperties": false
+      },
+      "renchan": {
+       "type": "object",
+       "properties": {
+        "dealer_win": {
+         "type": "boolean"
+        },
+        "dealer_tenpai": {
+         "type": "boolean"
+        },
+        "all_noten": {
+         "type": "boolean"
+        },
+        "draw": {
+         "type": "boolean"
+        },
+        "by_bakaze": {
+         "type": "object"
+        }
+       },
+       "additionalProperties": false
+      },
+      "renchan_on_abort": {
+       "type": "boolean"
+      },
+      "ryukyoku": {
+       "type": "object",
+       "properties": {
+        "nine_terminals": {
+         "type": "boolean"
+        },
+        "four_winds": {
+         "type": "boolean"
+        },
+        "four_kans": {
+         "type": "boolean"
+        },
+        "four_riichi": {
+         "type": "boolean"
+        },
+        "three_ron": {
+         "type": "boolean"
+        }
+       },
+       "additionalProperties": false
+      },
+      "double_ron": {
+       "type": "boolean"
+      },
+      "triple_ron": {
+       "enum": [
+        "allow",
+        "draw",
+        "head"
+       ]
+      },
+      "kyotaku_to": {
+       "enum": [
+        "kamicha",
+        "split"
+       ]
+      },
+      "wareme": {
+       "type": "boolean"
+      },
+      "kokushi_ankan_chankan": {
+       "type": "boolean"
+      },
+      "ryuuiisou_requires_hatsu": {
+       "type": "boolean"
+      },
+      "chuuren_any_suit": {
+       "type": "boolean"
+      },
+      "max_kans": {
+       "type": "integer"
+      },
+      "pon": {
+       "type": "boolean"
+      },
+      "kan_kinds": {
+       "type": "array"
+      },
+      "max_kans_per_player": {
+       "type": [
+        "null",
+        "integer",
+        "number",
+        "string",
+        "object",
+        "array"
+       ]
+      },
+      "next_dealer": {
+       "enum": [
+        "rotate",
+        "winner"
+       ]
+      }
+     },
+     "additionalProperties": false
+    },
+    "scoring": {
+     "type": "object",
+     "properties": {
+      "table": {
+       "oneOf": [
+        {
+         "enum": [
+          "standard",
+          "additive"
+         ]
+        },
+        {
+         "type": "string",
+         "pattern": "^custom:.+"
+        }
+       ]
+      },
+      "honba_points": {
+       "type": "integer"
+      },
+      "kyotaku_points": {
+       "type": "integer"
+      },
+      "noten_penalty": {
+       "type": "integer"
+      },
+      "mangan_round_up": {
+       "type": "boolean"
+      },
+      "round_to": {
+       "type": "integer"
+      },
+      "fu": {
+       "type": "object",
+       "properties": {
+        "enabled": {
+         "type": "boolean"
+        },
+        "double_wind_pair": {
+         "type": "integer"
+        },
+        "rinshan_tsumo_fu": {
+         "type": "integer"
+        },
+        "chiitoi": {
+         "enum": [
+          "25fu_2han",
+          "50fu_1han"
+         ]
+        },
+        "open_pinfu_fu": {
+         "type": "integer"
+        },
+        "menzen_tsumo_pinfu": {
+         "type": "boolean"
+        },
+        "yakuhai_tanki_fu": {
+         "type": "integer"
+        }
+       },
+       "additionalProperties": false
+      },
+      "limits": {
+       "type": "object",
+       "properties": {
+        "sanbaiman_from": {
+         "type": "integer"
+        },
+        "kazoe_from": {
+         "type": [
+          "null",
+          "integer",
+          "number",
+          "string",
+          "object",
+          "array"
+         ]
+        },
+        "yakuman_base": {
+         "type": "integer"
+        },
+        "max_multiple": {
+         "type": "integer"
+        },
+        "stack_with_normal": {
+         "type": "boolean"
+        }
+       },
+       "additionalProperties": false
+      },
+      "shibari": {
+       "type": "object",
+       "properties": {
+        "from_honba": {
+         "type": [
+          "null",
+          "integer",
+          "number",
+          "string",
+          "object",
+          "array"
+         ]
+        },
+        "han": {
+         "type": "integer"
+        },
+        "exclude_dora": {
+         "type": "boolean"
+        }
+       },
+       "additionalProperties": false
+      },
+      "tsumo_loss": {
+       "enum": [
+        "none",
+        "loss",
+        "add_1000",
+        "marudori",
+        "north_split"
+       ]
+      },
+      "payment": {
+       "enum": [
+        "standard",
+        "4p_total_from_opponent",
+        "4p_child_half_from_opponent",
+        "4p_dealer_share_from_opponent"
+       ]
+      },
+      "additive": {
+       "type": "object",
+       "properties": {
+        "per_han": {
+         "type": "integer"
+        },
+        "base": {
+         "type": "integer"
+        },
+        "dealer": {
+         "type": "integer"
+        },
+        "honba": {
+         "type": "integer"
+        },
+        "honba_dealer_only": {
+         "type": "boolean"
+        },
+        "multiplier": {
+         "type": "integer"
+        },
+        "round_to": {
+         "type": "integer"
+        },
+        "yakuman": {
+         "type": "integer"
+        },
+        "karasu": {
+         "type": "object",
+         "properties": {
+          "menzen": {
+           "type": "integer"
+          },
+          "open": {
+           "type": "integer"
+          }
+         },
+         "additionalProperties": false
+        }
+       },
+       "additionalProperties": false
+      },
+      "tsumo_table": {
+       "type": "object",
+       "additionalProperties": {
+        "type": "array",
+        "items": {
+         "type": "integer",
+         "minimum": 0
+        },
+        "minItems": 2,
+        "maxItems": 2
+       }
+      }
+     },
+     "additionalProperties": false
+    },
+    "penalties": {
+     "type": "object",
+     "properties": {
+      "chombo": {
+       "type": "object",
+       "properties": {
+        "kind": {
+         "enum": [
+          "points",
+          "rank_points",
+          "kyotaku"
+         ]
+        },
+        "value": {
+         "type": "integer"
+        },
+        "replay": {
+         "type": "boolean"
+        },
+        "honba_increase": {
+         "type": "boolean"
+        }
+       },
+       "additionalProperties": false
+      },
+      "false_call": {
+       "type": "object",
+       "properties": {
+        "kind": {
+         "enum": [
+          "agari_houki",
+          "kyotaku",
+          "chombo"
+         ]
+        }
+       },
+       "additionalProperties": false
+      },
+      "noten_riichi": {
+       "enum": [
+        "chombo",
+        "agari_houki"
+       ]
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "additionalProperties": false
+  },
+  "end": {
+   "type": "object",
+   "properties": {
+    "tobi": {
+     "type": "object",
+     "properties": {
+      "enabled": {
+       "type": "boolean"
+      },
+      "at": {
+       "type": "integer"
+      },
+      "exact_zero_is_tobi": {
+       "type": "boolean"
+      },
+      "on_noten_penalty": {
+       "type": "boolean"
+      },
+      "penalty_points": {
+       "type": "integer"
+      },
+      "penalty_to": {
+       "enum": [
+        "none",
+        "tenpai_players",
+        "winner"
+       ]
+      }
+     },
+     "additionalProperties": false
+    },
+    "negative_points": {
+     "enum": [
+      "continue",
+      "zero"
+     ]
+    },
+    "cold_points": {
+     "type": [
+      "null",
+      "integer",
+      "number",
+      "string",
+      "object",
+      "array"
+     ]
+    },
+    "time_limit_sec": {
+     "type": [
+      "null",
+      "integer",
+      "number",
+      "string",
+      "object",
+      "array"
+     ]
+    },
+    "extension": {
+     "type": "object",
+     "properties": {
+      "enabled": {
+       "type": "boolean"
+      },
+      "until_points": {
+       "type": "integer"
+      },
+      "max_rounds": {
+       "type": "integer"
+      },
+      "once": {
+       "type": "boolean"
+      },
+      "renchan_first": {
+       "type": "boolean"
+      }
+     },
+     "additionalProperties": false
+    },
+    "agari_yame": {
+     "type": "object",
+     "properties": {
+      "enabled": {
+       "type": "boolean"
+      },
+      "when": {
+       "enum": [
+        "last_round"
+       ]
+      },
+      "forced": {
+       "type": "boolean"
+      },
+      "others_may_continue": {
+       "type": "boolean"
+      }
+     },
+     "additionalProperties": false
+    },
+    "tenpai_yame": {
+     "type": "object",
+     "properties": {
+      "enabled": {
+       "type": "boolean"
+      },
+      "forced": {
+       "type": "boolean"
+      },
+      "require_tenpai": {
+       "type": "boolean"
+      }
+     },
+     "additionalProperties": false
+    },
+    "max_honba": {
+     "type": [
+      "null",
+      "integer",
+      "number",
+      "string",
+      "object",
+      "array"
+     ]
+    }
+   },
+   "additionalProperties": false
+  },
+  "settlement": {
+   "type": "object",
+   "properties": {
+    "start_points": {
+     "type": "integer"
+    },
+    "return_points": {
+     "type": "integer"
+    },
+    "unit": {
+     "type": "object",
+     "properties": {
+      "name": {
+       "type": "string"
+      },
+      "points_per_unit": {
+       "type": "integer"
+      },
+      "decimals": {
+       "type": "integer"
+      }
+     },
+     "additionalProperties": false
+    },
+    "uma": {
+     "oneOf": [
+      {
+       "type": "array",
+       "items": {
+        "type": "number"
+       }
+      },
+      {
+       "type": "object"
+      }
+     ]
+    },
+    "oka": {
+     "enum": [
+      "to_first",
+      "none",
+      "split"
+     ]
+    },
+    "tie": {
+     "enum": [
+      "split",
+      "seat_order",
+      "draw"
+     ]
+    },
+    "dealer_takes_all": {
+     "type": "boolean"
+    },
+    "chips": {
+     "type": "array"
+    },
+    "yakitori": {
+     "type": "object",
+     "properties": {
+      "enabled": {
+       "type": "boolean"
+      },
+      "penalty": {
+       "type": "object",
+       "properties": {
+        "kind": {
+         "type": "string"
+        },
+        "count": {
+         "type": "integer"
+        }
+       },
+       "additionalProperties": false
+      },
+      "revive": {
+       "type": "array"
+      }
+     },
+     "additionalProperties": false
+    },
+    "external_points": {
+     "type": "array"
+    },
+    "payout": {
+     "type": [
+      "null",
+      "object"
+     ]
+    },
+    "rounding": {
+     "type": "object",
+     "properties": {
+      "score_to_1000": {
+       "type": "string"
+      },
+      "remainder_to_top": {
+       "type": "boolean"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "additionalProperties": false
+  },
+  "unknown": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   }
+  },
+  "meta": {
+   "type": "object"
+  }
+ },
+ "required": [
+  "format",
+  "version",
+  "name",
+  "tileset",
+  "players",
+  "hand_size",
+  "length",
+  "winds",
+  "wall_rules"
+ ]
+}

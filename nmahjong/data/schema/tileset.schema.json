@@ -1,0 +1,66 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://nmahjong.dev/schema/tileset.schema.json",
+ "title": "Nmahjong tileset 1.0",
+ "type": "object",
+ "additionalProperties": false,
+ "properties": {
+  "format": {
+   "const": "nmahjong-tileset"
+  },
+  "version": {
+   "const": "1.0"
+  },
+  "id": {
+   "type": "string",
+   "pattern": "^sha256:[0-9a-f]{64}$"
+  },
+  "name": {
+   "type": "string",
+   "pattern": "^[a-z0-9][a-z0-9-]*$"
+  },
+  "aliases": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   }
+  },
+  "tiles": {
+   "type": "array",
+   "minItems": 1,
+   "items": {
+    "type": "object",
+    "required": [
+     "id",
+     "kind"
+    ],
+    "additionalProperties": false,
+    "properties": {
+     "id": {
+      "type": "integer",
+      "minimum": 0
+     },
+     "kind": {
+      "type": "string"
+     },
+     "mark": {
+      "type": "string"
+     },
+     "name": {
+      "type": "string"
+     }
+    }
+   }
+  },
+  "meta": {
+   "type": "object"
+  }
+ },
+ "required": [
+  "format",
+  "version",
+  "name",
+  "id",
+  "tiles"
+ ]
+}

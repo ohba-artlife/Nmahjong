@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nmahjong ルール生成</title>
+<style>
+  :root { --bg:#fafafa; --fg:#222; --mute:#666; --line:#ddd; --acc:#2a6; --warn:#c33; --chg:#fff3c4; }
+  body { margin:0; font: 14px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; color:var(--fg); background:var(--bg); }
+  header { position:sticky; top:0; background:#fff; border-bottom:1px solid var(--line); padding:8px 16px; display:flex; flex-wrap:wrap; gap:8px 16px; align-items:center; z-index:2; }
+  header h1 { font-size:16px; margin:0 8px 0 0; }
+  main { display:grid; grid-template-columns: minmax(0,1fr) 360px; gap:16px; padding:16px; }
+  @media (max-width: 900px) { main { grid-template-columns: minmax(0,1fr); } aside { position:static; } td.k { word-break:break-all; } }
+  header select { max-width: calc(100vw - 110px); }
+  details { background:#fff; border:1px solid var(--line); border-radius:6px; margin-bottom:10px; }
+  summary { padding:8px 12px; cursor:pointer; font-weight:600; }
+  table { width:100%; border-collapse:collapse; }
+  td { padding:4px 8px; border-top:1px solid #f0f0f0; vertical-align:top; }
+  td.k { width:38%; font-family: ui-monospace, Menlo, Consolas, monospace; font-size:12.5px; }
+  td.k small { display:block; color:var(--mute); font-family: system-ui, sans-serif; font-size:11.5px; }
+  tr.changed td { background:var(--chg); }
+  input[type=text], input[type=number], select, textarea { font: inherit; padding:3px 6px; border:1px solid #bbb; border-radius:4px; max-width:100%; }
+  input[type=number] { width:9em; } input[type=text] { width:95%; } textarea { width:95%; min-height:2.4em; font-family: ui-monospace, Menlo, Consolas, monospace; font-size:12px; }
+  aside { position:sticky; top:56px; align-self:start; }
+  .card { background:#fff; border:1px solid var(--line); border-radius:6px; padding:12px; margin-bottom:10px; }
+  .id { font-family: ui-monospace, Menlo, Consolas, monospace; font-size:11.5px; word-break:break-all; }
+  .err { color:var(--warn); white-space:pre-wrap; }
+  .ok { color:var(--acc); }
+  button { font:inherit; padding:5px 12px; border:1px solid #999; border-radius:4px; background:#fff; cursor:pointer; }
+  button.primary { background:var(--acc); color:#fff; border-color:var(--acc); }
+  .diff { font-family: ui-monospace, Menlo, Consolas, monospace; font-size:11.5px; max-height:40vh; overflow:auto; }
+  .muted { color:var(--mute); }
+  #filter { width:14em; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Nmahjong ルール生成</h1>
+  <label>雛形 <select id="base"></select></label>
+  <label title="雛形の名前。内容を変えると自動で -custom が付く">名前（自動） <input id="name" type="text" style="width:17em; background:#f3f3f3" readonly tabindex="-1"></label>
+  <label title="名前の最後に足す文字（店の名前など）。空でもよい">追記 <input id="suffix" type="text" style="width:9em" placeholder="例：tokyo"></label>
+  <label>牌表 <select id="tileset"></select></label>
+  <input id="tsfile" type="file" accept=".json" style="display:none">
+  <button id="tsload" title="「牌表を作る」の画面で作ったファイルを選ぶ">牌表を読み込み…</button>
+  <a href="tilesetgen.html" style="font-size:12.5px">牌表を作る</a>
+  <label>絞り込み <input id="filter" type="text" placeholder="riichi, uma …"></label>
+  <label><input id="onlyChanged" type="checkbox"> 変更した項目だけ</label>
+  <input id="file" type="file" accept=".json" style="display:none">
+  <button id="load">読み込み…</button>
+</header>
+<main>
+  <section id="form"></section>
+  <aside>
+    <div class="card">
+      <div><b>id</b> <span id="status" class="ok"></span></div>
+      <div class="id" id="id">—</div>
+      <div class="muted" id="fname" style="word-break:break-all"></div>
+      <div style="margin-top:8px; display:flex; gap:8px; flex-wrap:wrap">
+        <button class="primary" id="download">ダウンロード</button>
+        <button id="copy">JSON をコピー</button>
+        <button id="reset">雛形に戻す</button>
+      </div>
+      <div class="err" id="namewarn"></div>
+      <div class="err" id="errors"></div>
+    </div>
+    <div class="card">
+      <b>この牌表の印とエクストラ牌</b> <span class="muted">機能はルールの marks・nuki・mark_overrides で付ける</span>
+      <div id="tsinfo" style="font-size:12.5px; margin-top:4px"></div>
+    </div>
+    <div class="card">
+      <b>欠落申告（unknown）</b> <span class="muted">出典に無い項目のパス、1 行 1 つ。id に含まれる</span>
+      <textarea id="unknown" style="min-height:4em"></textarea>
+      <b>出典（meta.source）</b> <span class="muted">id に含まれない</span>
+      <input id="source" type="text">
+      <b>注記（meta.note）</b>
+      <textarea id="note"></textarea>
+    </div>
+    <div class="card">
+      <b>雛形との差分</b> <span id="diffCount" class="muted"></span>
+      <div class="diff" id="diff"></div>
+    </div>
+  </aside>
+</main>
+<script src="../js/nmahjong.js"></script>
+<script src="../js/bundled.js"></script>
+<script>
+(function () {
+  const NM = window.NMAHJONG, B = window.NMAHJONG_BUNDLE, D = B.defaults, DESC = B.descriptions;
+  const $ = id => document.getElementById(id);
+  const TOP_EDITABLE = ["players", "hand_size", "length", "rounds_total", "winds"];
+  const SECTIONS = [["基本", null], ["wall_rules 山", "wall_rules"], ["game_rules 進行・役・点数", "game_rules"], ["end 終局", "end"], ["settlement 精算", "settlement"]];
+  let base = null;      // 雛形（正規形）
+  let cur = null;       // 編集中（省略なしの形）
+  let rows = [];        // [{path, input, kind}]
+
+  function emptyRuleset(ts) {
+    return { format: D.format, version: D.version, name: "", tileset: { name: ts.name, id: ts.id }, players: 4, hand_size: 13, length: "east_south",
+      winds: ["E", "S", "W", "N"], wall_rules: { deal: "N_each_then_1_to_dealer", dead_wall: 14, dora_indicator: [8], ura_indicator: [9], kan_dora: [6, 4, 2, 0], kan_ura: [7, 5, 3, 1], rinshan: [12, 13, 10, 11], break: { by: "dice" } },
+      game_rules: {}, end: {}, settlement: {} };
+  }
+  function tilesetLabel(ts) { return ts.name + "  " + ts.tiles.length + " 枚  " + ts.id.slice(7, 15) + (ts.aliases ? "  (" + ts.aliases.join(",") + ")" : ""); }
+  // 自分で作った牌表（tilesetgen.html・tileset new）を一覧に足して選ぶ
+  function addTileset(ts) {
+    if (ts.format !== "nmahjong-tileset") throw new Error("牌表のファイルではない（format が nmahjong-tileset ではない）");
+    NM.tileset.validate(ts);
+    const tsel = $("tileset");
+    if (!B.tilesets.find(t => t.id === ts.id)) { B.tilesets.push(ts); tsel.appendChild(new Option(tilesetLabel(ts) + "  （読み込み）", ts.id)); }
+    tsel.value = ts.id;
+    cur.tileset = { name: ts.name, id: ts.id };
+    refresh();
+  }
+  window.NM_RULEGEN_ADD_TILESET = addTileset;
+  function init() {
+    const bsel = $("base");
+    bsel.appendChild(new Option("（空：既定値だけ）", ""));
+    for (const rs of B.rulesets) bsel.appendChild(new Option(rs.name + "  — " + (rs.meta && rs.meta.note ? rs.meta.note.slice(0, 40) : ""), rs.id));
+    const tsel = $("tileset");
+    for (const ts of B.tilesets) tsel.appendChild(new Option(tilesetLabel(ts), ts.id));
+    bsel.value = (B.rulesets.find(r => r.name === "tenhou-4p-hanchan-red") || B.rulesets[0]).id;
+    bsel.addEventListener("change", loadBase);
+    tsel.addEventListener("change", () => { const ts = B.tilesets.find(t => t.id === tsel.value); cur.tileset = { name: ts.name, id: ts.id }; refresh(); });
+    $("suffix").addEventListener("input", refresh);
+    $("unknown").addEventListener("input", () => { const v = $("unknown").value.split("\n").map(s => s.trim()).filter(Boolean); if (v.length) cur.unknown = v; else delete cur.unknown; refresh(); });
+    $("source").addEventListener("input", metaChanged); $("note").addEventListener("input", metaChanged);
+    $("filter").addEventListener("input", applyFilter); $("onlyChanged").addEventListener("change", applyFilter);
+    $("download").addEventListener("click", download);
+    $("copy").addEventListener("click", () => navigator.clipboard.writeText(JSON.stringify(finalized(), null, 1)));
+    $("reset").addEventListener("click", loadBase);
+    $("tsload").addEventListener("click", () => $("tsfile").click());
+    $("tsfile").addEventListener("change", ev => {
+      const f = ev.target.files[0]; if (!f) return;
+      f.text().then(txt => {
+        try { addTileset(JSON.parse(txt)); } catch (e) { alert("牌表を読み込めません: " + (e.message || e)); }
+        ev.target.value = "";
+      });
+    });
+    $("load").addEventListener("click", () => $("file").click());
+    $("file").addEventListener("change", ev => { const f = ev.target.files[0]; if (!f) return; f.text().then(txt => { try { const rs = JSON.parse(txt); setCurrent(NM.ruleset.normalize(rs), rs); } catch (e) { alert("読み込めない: " + e.message); } }); });
+    loadBase();
+  }
+  function metaChanged() {
+    const s = $("source").value.trim(), n = $("note").value.trim();
+    if (s || n) { cur.meta = {}; if (s) cur.meta.source = s; if (n) cur.meta.note = n; } else delete cur.meta;
+    refresh();
+  }
+  function loadBase() {
+    const id = $("base").value;
+    const rs = id ? B.rulesets.find(r => r.id === id) : emptyRuleset(B.tilesets.find(t => t.id === $("tileset").value) || B.tilesets[0]);
+    setCurrent(NM.ruleset.normalize(rs), rs);
+  }
+  function setCurrent(norm, rs) {
+    base = JSON.parse(JSON.stringify(norm));
+    cur = JSON.parse(JSON.stringify(norm));
+    delete cur.id;
+    baseName = cur.name || ""; $("suffix").value = "";
+    try { baseId = NM.ruleset.finalize(JSON.parse(JSON.stringify(cur))).id; } catch (e) { baseId = null; }
+    $("tileset").value = cur.tileset.id;
+    $("unknown").value = (cur.unknown || []).join("\n");
+    $("source").value = (cur.meta && cur.meta.source) || ""; $("note").value = (cur.meta && cur.meta.note) || "";
+    buildForm();
+    refresh();
+  }
+  function enumFor(path) {
+    const parts = path.split("."); const key = parts[parts.length - 1]; const parent = parts.slice(-2).join(".");
+    return D.enum[parent] || D.enum[key] || null;
+  }
+  function isFreeOrPassthrough(path) {
+    return D.free_key_objects.some(p => path === p || path.startsWith(p + ".")) || D.passthrough.some(p => path === p || path.startsWith(p + "."));
+  }
+  function leafPaths(obj, prefix, out) {
+    for (const k of Object.keys(obj)) {
+      const p = prefix ? prefix + "." + k : k, v = obj[k];
+      if (isFreeOrPassthrough(p)) { out.push(p); continue; }
+      if (v !== null && typeof v === "object" && !Array.isArray(v) && Object.keys(v).length) leafPaths(v, p, out);
+      else out.push(p);
+    }
+  }
+  function getPath(obj, path) { return path.split(".").reduce((o, k) => (o == null ? undefined : o[k]), obj); }
+  function buildForm() {
+    const form = $("form"); form.innerHTML = ""; rows = [];
+    for (const [title, sect] of SECTIONS) {
+      const det = document.createElement("details"); det.open = sect !== "wall_rules";
+      det.innerHTML = `<summary>${title}</summary>`;
+      const tbl = document.createElement("table");
+      const paths = [];
+      if (sect === null) paths.push(...TOP_EDITABLE.filter(k => k in cur || k === "rounds_total"));
+      else if (cur[sect]) leafPaths(cur[sect], sect, paths);
+      for (const p of paths) tbl.appendChild(row(p));
+      det.appendChild(tbl); form.appendChild(det);
+    }
+  }
+  function row(path) {
+    const tr = document.createElement("tr");
+    const v = getPath(cur, path);
+    const key = path.split(".").pop();
+    let desc = "";
+    { const parts = path.split("."); const sect = ["wall_rules", "game_rules", "end", "settlement"].includes(parts[0]) ? parts[0] : "top";
+      const rest = sect === "top" ? parts : parts.slice(1);
+      for (let i = 0; i < rest.length && !desc; i++) desc = DESC[sect + "|" + rest.slice(i).join(".")] || ""; }
+    const tdk = document.createElement("td"); tdk.className = "k"; tdk.innerHTML = `${path}<small>${desc}</small>`;
+    const tdv = document.createElement("td");
+    let input, kind;
+    const en = enumFor(path);
+    if (isFreeOrPassthrough(path) || Array.isArray(v) || (v !== null && typeof v === "object") || path === "rounds_total" && v === undefined) {
+      input = document.createElement("textarea"); input.value = v === undefined ? "" : JSON.stringify(v); kind = "json";
+      input.title = "JSON で書く（配列・オブジェクト・null）";
+    } else if (typeof v === "boolean") { input = document.createElement("input"); input.type = "checkbox"; input.checked = v; kind = "bool"; }
+    else if (en && (typeof v === "string" || v === null)) { input = document.createElement("select"); for (const o of en) input.appendChild(new Option(o, o)); if (v !== null) input.value = v; kind = "enum"; }
+    else if (typeof v === "number") { input = document.createElement("input"); input.type = "number"; input.step = "any"; input.value = v; kind = "number"; }
+    else if (v === null) { input = document.createElement("input"); input.type = "text"; input.value = "null"; input.title = "数値か null か JSON"; kind = "json"; }
+    else { input = document.createElement("input"); input.type = "text"; input.value = v; kind = "text"; }
+    input.addEventListener(kind === "json" || kind === "text" || kind === "number" ? "input" : "change", () => onEdit(path, input, kind, tr));
+    tdv.appendChild(input); tr.appendChild(tdk); tr.appendChild(tdv);
+    rows.push({ path, input, kind, tr });
+    return tr;
+  }
+  function onEdit(path, input, kind, tr) {
+    let val;
+    try {
+      if (kind === "bool") val = input.checked;
+      else if (kind === "enum") val = input.value;
+      else if (kind === "number") { if (input.value === "") return; val = Number(input.value); }
+      else if (kind === "json") { const s = input.value.trim(); if (s === "") { unsetPath(cur, path); refresh(); return; } val = JSON.parse(s); }
+      else val = input.value;
+      input.style.borderColor = "";
+    } catch (e) { input.style.borderColor = "var(--warn)"; return; }
+    NM.ruleset.setPath(cur, path, val);
+    if (path.endsWith(".enabled")) {        // enabled を切り替えると従属項目（既定値）が現れる／消えるので作り直す
+      try { cur = NM.ruleset.normalize(cur); delete cur.id; buildForm(); } catch (e) { /* エラーは refresh で表示 */ }
+    }
+    refresh();
+  }
+  function unsetPath(obj, path) { const parts = path.split("."); let o = obj; for (let i = 0; i < parts.length - 1; i++) { o = o[parts[i]]; if (!o) return; } delete o[parts[parts.length - 1]]; }
+  let baseName = "", baseId = null;
+  // 名前は自動：雛形（読み込んだファイル）の名前 ＋ 内容を変えたら -custom ＋ 追記欄の文字。id は名前を含まないので、ファイル名の id で区別できる
+  function autoName() {
+    let changed = false;
+    try { changed = NM.ruleset.finalize(JSON.parse(JSON.stringify(cur))).id !== baseId; } catch (e) { changed = true; }
+    const sfx = $("suffix").value.trim().replace(/\s+/g, "-");
+    const parts = [];
+    if (baseName) parts.push(baseName);
+    if (changed && !/(^|-)custom(-|$)/.test(baseName)) parts.push("custom");
+    if (sfx) parts.push(sfx);
+    const name = parts.join("-");
+    if (name) cur.name = name; else delete cur.name;
+    $("name").value = name;
+  }
+  function finalized() { return NM.ruleset.finalize(cur); }
+  function nameClash(fin) { return !!(fin && cur.name && B.rulesets.some(r => r.name === cur.name && r.id !== fin.id)); }
+  function refresh() {
+    let fin = null, err = "";
+    autoName();
+    try { fin = finalized(); NM.ruleset.validate(fin); } catch (e) { err = e.message; }
+    $("errors").textContent = err;
+    $("status").textContent = err ? "NG" : "OK"; $("status").className = err ? "err" : "ok";
+    $("id").textContent = fin ? fin.id : "—";
+    $("fname").textContent = fin && cur.name ? NM.ruleset.filename(fin) : (fin ? "追記欄に名前を入れるとファイル名が決まる" : "");
+    // 名前の取り違え防止：同梱のルールと同じ名前なのに内容（id）が違うときは、名前を変えるまで保存させない
+    const clash = nameClash(fin);
+    $("namewarn").textContent = clash ? `名前「${cur.name}」は同梱のルールと同じですが、内容（id）が違います。追記欄に文字を足してください` : "";
+    $("download").disabled = $("copy").disabled = !!clash || !!err;
+    $("download").style.opacity = $("copy").style.opacity = (clash || err) ? "0.5" : "";
+    if ($("name")) $("name").style.borderColor = clash ? "var(--warn)" : "";
+    // 差分
+    const d = fin ? NM.ruleset.diff(base, fin).filter(([k]) => k !== "id" && k !== "name" && !k.startsWith("meta")) : [];
+    $("diffCount").textContent = d.length ? `${d.length} 件` : "なし";
+    $("diff").innerHTML = d.map(([k, a, b]) => `<div><b>${k}</b>: <span class="muted">${JSON.stringify(a)}</span> → ${JSON.stringify(b)}</div>`).join("");
+    const changed = new Set(d.map(x => x[0]));
+    for (const r of rows) r.tr.classList.toggle("changed", [...changed].some(c => c === r.path || c.startsWith(r.path + ".")));
+    applyFilter();
+    tsInfo(fin);
+  }
+  // 選んだ牌表の印・エクストラ牌が、いまのルールで機能を持っているかを見せる
+  function tsInfo(fin) {
+    const box = $("tsinfo"); box.textContent = "";
+    const ts = B.tilesets.find(t => t.id === cur.tileset.id);
+    const line = (txt, cls) => { const d = document.createElement("div"); d.textContent = txt; if (cls) d.className = cls; box.appendChild(d); };
+    if (!ts) { line("牌表が一覧に無い"); return; }
+    const g = (fin || cur).game_rules || {};
+    const marks = g.marks || {}, ov = g.mark_overrides || [], nk = g.nuki || {};
+    const tsMarks = Array.from(new Set(ts.tiles.filter(t => t.mark).map(t => t.mark)));
+    const ex = ts.tiles.filter(t => t.kind === "ex");
+    if (!tsMarks.length && !ex.length) { line("印もエクストラ牌も無い牌表です", "muted"); }
+    for (const m of tsMarks) {
+      const n = ts.tiles.filter(t => t.mark === m).length;
+      if (marks[m]) line("印 " + m + "（" + n + " 枚）：" + JSON.stringify(marks[m].effects), "ok");
+      else line("印 " + m + "（" + n + " 枚）：ルールに書かれていない → 機能なし。game_rules.marks に \"" + m + "\": {\"effects\": [\"dora\"]} のように足す", "err");
+    }
+    for (const m of Object.keys(marks)) if (tsMarks.indexOf(m) < 0) line("ルールの印 " + m + "：この牌表には無い（効果なし）", "muted");
+    if (ex.length) {
+      const nukiEx = nk.enabled && (nk.tiles || []).indexOf("ex") >= 0;
+      const byId = ex.filter(t => ov.some(o => o.tile_id === t.id));
+      const byMark = ex.filter(t => t.mark && marks[t.mark]);
+      const txt = "エクストラ牌 " + ex.length + " 枚（" + ex.map(t => t.name + "=" + t.id).join("、") + "）：";
+      if (nukiEx) line(txt + "抜きドラ（1 枚 " + (nk.value || 1) + " 翻）", "ok");
+      else if (byId.length || byMark.length) line(txt + "印か番号の指定で機能あり（" + Array.from(new Set(byId.concat(byMark))).map(t => t.name).join("・") + "）", "ok");
+      else line(txt + "機能なし。抜きドラにするなら game_rules.nuki.enabled を入れて tiles を [\"ex\"] に", "err");
+    }
+  }
+  function applyFilter() {
+    const q = $("filter").value.trim().toLowerCase().split(/[\s,]+/).filter(Boolean);
+    const only = $("onlyChanged").checked;
+    for (const r of rows) {
+      const hit = !q.length || q.some(w => r.path.toLowerCase().includes(w) || (r.tr.querySelector("small").textContent || "").toLowerCase().includes(w));
+      r.tr.style.display = hit && (!only || r.tr.classList.contains("changed")) ? "" : "none";
+    }
+  }
+  function download() {
+    let fin; try { fin = finalized(); NM.ruleset.validate(fin); } catch (e) { alert("直してから: " + e.message); return; }
+    if (!cur.name) { alert("追記欄に名前を入れてください"); return; }
+    if (nameClash(fin)) { alert("同梱のルールと同じ名前で内容が違います。追記欄に文字を足してください"); return; }
+    const blob = new Blob([JSON.stringify(fin, null, 1) + "\n"], { type: "application/json" });
+    const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = NM.ruleset.filename(fin); a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  }
+  init();
+})();
+</script>
+</body>
+</html>

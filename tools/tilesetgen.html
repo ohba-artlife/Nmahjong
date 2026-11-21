@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nmahjong 牌表を作る</title>
+<style>
+  :root { --bg:#fafafa; --fg:#222; --mute:#666; --line:#ddd; --acc:#2a6; --warn:#c33; --red:#c0392b; }
+  body { margin:0; font: 14px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif; color:var(--fg); background:var(--bg); }
+  header { background:#fff; border-bottom:1px solid var(--line); padding:8px 16px; display:flex; gap:16px; align-items:baseline; flex-wrap:wrap; }
+  header h1 { font-size:16px; margin:0; }
+  header a { color:var(--acc); }
+  main { display:grid; grid-template-columns: minmax(0,1fr) 380px; gap:16px; padding:16px; }
+  @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
+  .card { background:#fff; border:1px solid var(--line); border-radius:6px; padding:12px 14px; margin-bottom:12px; }
+  .card h2 { font-size:14px; margin:0 0 6px; }
+  .muted { color:var(--mute); font-size:12.5px; }
+  label.chk { display:inline-flex; align-items:center; gap:4px; margin-right:16px; }
+  select, input[type=text], textarea { font: inherit; padding:3px 6px; border:1px solid #bbb; border-radius:4px; max-width:100%; }
+  .how { margin:6px 0; } .how code { display:block; background:#f4f4f4; border:1px solid var(--line); border-radius:4px; padding:4px 6px; font-size:12px; white-space:pre-wrap; word-break:break-all; }
+  textarea { width:96%; min-height:3.2em; font-family: ui-monospace, Menlo, Consolas, monospace; font-size:12.5px; }
+  input[type=text] { width:96%; }
+  .row { display:flex; gap:14px; flex-wrap:wrap; align-items:center; margin:4px 0; }
+  .id { font-family: ui-monospace, Menlo, Consolas, monospace; font-size:11.5px; word-break:break-all; }
+  .err { color:var(--warn); white-space:pre-wrap; }
+  .ok { color:var(--acc); }
+  button { font:inherit; padding:5px 12px; border:1px solid #999; border-radius:4px; background:#fff; cursor:pointer; }
+  button.primary { background:var(--acc); color:#fff; border-color:var(--acc); }
+  button:disabled { opacity:.5; cursor:default; }
+  aside { position:sticky; top:12px; align-self:start; }
+  .tiles { display:flex; flex-wrap:wrap; gap:3px; }
+  .t { min-width:2.3em; text-align:center; padding:2px 3px; border:1px solid #ccc; border-radius:4px; background:#fff; font-family: ui-monospace, Menlo, Consolas, monospace; font-size:12px; }
+  .t small { display:block; color:var(--mute); font-size:10px; }
+  .t.mark { border-color:var(--red); color:var(--red); font-weight:600; }
+  .t.ex { border-style:dashed; }
+  .grp { margin:6px 0; }
+  .big { font-size:22px; font-weight:600; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Nmahjong 牌表を作る</h1>
+  <span class="muted">色・赤・除く牌を選ぶと、牌表のファイルと id ができます。</span>
+  <a href="rulegen.html">ルール生成へ</a>
+</header>
+<main>
+  <section>
+    <div class="card">
+      <h2>1　色（各 4 枚）</h2>
+      <div class="row">
+        <label class="chk"><input type="checkbox" id="c_m" checked> 萬子（1m〜9m）</label>
+        <label class="chk"><input type="checkbox" id="c_p" checked> 筒子（1p〜9p）</label>
+        <label class="chk"><input type="checkbox" id="c_s" checked> 索子（1s〜9s）</label>
+        <label class="chk"><input type="checkbox" id="c_z" checked> 字牌（東南西北白發中）</label>
+      </div>
+    </div>
+    <div class="card">
+      <h2>2　赤（5 の牌のうち何枚を赤にするか）</h2>
+      <div class="row">
+        <label>5m <select id="r_m"></select></label>
+        <label>5p <select id="r_p"></select></label>
+        <label>5s <select id="r_s"></select></label>
+      </div>
+      <div class="muted">選んでいない色・除いた牌の赤は無視されます。</div>
+    </div>
+    <div class="card">
+      <h2>3　除く牌種（その牌種の 4 枚を全部除く）</h2>
+      <div class="row"><label class="chk"><input type="checkbox" id="sanma"> 三麻（2m〜8m を除く）</label></div>
+      <input type="text" id="exclude" placeholder="例：2m,3m,4m　／　N">
+      <div class="muted">カンマ区切り。牌種は 1m〜9m・1p〜9p・1s〜9s・E S W N（東南西北）・P F C（白發中）。</div>
+    </div>
+    <div class="card">
+      <h2>4　そのほかの印（上級。使わなければ空のまま）</h2>
+      <textarea id="marks" placeholder="例：&#10;3m=red&#10;5p=red,gold&#10;P=pocchi,reverse_pocchi"></textarea>
+      <div class="muted">1 行に「牌種=印,印,…」。その牌種の 1 枚目から順に印が付きます（4 枚まで）。5 の赤を上の欄と両方に書いたら、この欄が優先です。</div>
+    </div>
+    <div class="card">
+      <h2>5　エクストラ牌（花牌など。使わなければ空のまま）</h2>
+      <input type="text" id="extras" placeholder="例：梅,蘭,菊,竹　／　印を付けるなら 梅=flower,蘭=flower">
+      <div class="muted">カンマ区切り。1 つの名前が 1 枚。「名前=印」と書くと、その牌に印が付きます（機能は下の 6 のとおりルールで付けます）。</div>
+    </div>
+    <div class="card">
+      <h2>6　牌に機能を持たせるには（ルールの側で決めます）</h2>
+      <div class="muted">牌表は「どの牌があるか・どの牌に印があるか」だけを持ちます。その牌が何をするかは、ルール生成の画面で次の項目に書きます。</div>
+      <div id="howto" style="margin-top:6px"></div>
+    </div>
+    <div class="card">
+      <h2>できる牌表</h2>
+      <div id="preview"></div>
+    </div>
+  </section>
+  <aside>
+    <div class="card">
+      <div><span class="big" id="count">—</span> 枚　<span id="status"></span></div>
+      <div>name <b id="tname">—</b></div>
+      <div class="muted">id</div>
+      <div class="id" id="tid">—</div>
+      <div class="muted" id="fname" style="word-break:break-all"></div>
+      <div class="muted" id="same"></div>
+      <div style="margin-top:8px; display:flex; gap:8px; flex-wrap:wrap">
+        <button class="primary" id="download">ダウンロード</button>
+        <button id="copy">JSON をコピー</button>
+      </div>
+      <div class="err" id="errors"></div>
+    </div>
+    <div class="card muted">
+      同じ指定からは、いつでも同じ id の牌表ができます（Python の <code>python3 -m nmahjong tileset new</code> とも同じ）。<br>
+      できたファイルは、ルール生成の画面の「牌表を読み込み…」で使えます。
+    </div>
+  </aside>
+</main>
+<script src="../js/nmahjong.js"></script>
+<script src="../js/bundled.js"></script>
+<script>
+(function () {
+  const NM = window.NMAHJONG, B = window.NMAHJONG_BUNDLE;
+  const $ = id => document.getElementById(id);
+  const SANMA = ["2m", "3m", "4m", "5m", "6m", "7m", "8m"];
+  const JP = { E: "東", S: "南", W: "西", N: "北", P: "白", F: "發", C: "中" };
+  const KIND_RE = /^([1-9][mps]|[ESWNPFC])$/;
+  let cur = null;
+
+  for (const c of "mps") { const s = $("r_" + c); for (let n = 0; n <= 4; n++) s.appendChild(new Option(n + " 枚", n)); }
+  function list(v) { return v.split(/[,、\s]+/).map(x => x.trim()).filter(Boolean); }
+
+  function spec() {
+    const colors = "mpsz".split("").filter(c => $("c_" + c).checked).join("");
+    let exclude = list($("exclude").value);
+    if ($("sanma").checked) exclude = exclude.concat(SANMA);
+    exclude = Array.from(new Set(exclude));
+    const marks = {};
+    for (const c of "mps") { const n = Number($("r_" + c).value); if (n > 0 && colors.indexOf(c) >= 0) marks["5" + c] = Array(n).fill("red"); }
+    for (const line of $("marks").value.split("\n")) {
+      const s = line.trim(); if (!s) continue;
+      const i = s.indexOf("="); if (i < 1) throw new NM.ValidationError("4 の印の行は「牌種=印,印」の形: " + s);
+      const kind = s.slice(0, i).trim(), vals = list(s.slice(i + 1));
+      if (!KIND_RE.test(kind)) throw new NM.ValidationError("4 の印：「" + kind + "」は牌種ではありません（1m〜9m・1p〜9p・1s〜9s・E S W N P F C）。エクストラ牌の印は 5 の欄に「名前=印」で書きます");
+      const bad = vals.find(v => v.indexOf("=") >= 0);
+      if (bad) throw new NM.ValidationError("4 の印：1 行に書けるのは 1 つの牌種だけです（「" + bad + "」は別の行に。エクストラ牌の印は 5 の欄に「名前=印」で）");
+      if (!vals.length) throw new NM.ValidationError("4 の印：" + kind + " の印が空です");
+      marks[kind] = vals;
+    }
+    const extras = $("extras").value.split(/[,、]+/).map(x => x.trim()).filter(Boolean).map(x => {
+      const j = x.indexOf("="); if (j < 0) return x;
+      const nm = x.slice(0, j).trim(), mk = x.slice(j + 1).trim();
+      if (!nm || !mk || mk.indexOf("=") >= 0) throw new NM.ValidationError("5 のエクストラ牌は「名前」か「名前=印」の形: " + x);
+      return { name: nm, mark: mk };
+    });
+    return { colors: colors, exclude: exclude, marks: marks, extras: extras };
+  }
+  function label(k) { return JP[k] ? JP[k] : k; }
+
+  function refresh() {
+    $("errors").textContent = ""; $("status").textContent = ""; $("same").textContent = "";
+    try {
+      const ts = NM.tileset.build(spec());
+      NM.tileset.validate(ts);
+      cur = ts;
+      $("count").textContent = ts.tiles.length; $("tname").textContent = ts.name; $("tid").textContent = ts.id; $("fname").textContent = NM.tileset.filename(ts);
+      $("status").textContent = "検証 OK"; $("status").className = "ok";
+      const same = B.tilesets.find(t => t.id === ts.id);
+      if (same) $("same").textContent = "同梱の牌表と同じです（" + same.name + (same.aliases ? "、" + same.aliases.join("・") : "") + "）";
+      const pv = $("preview"); pv.textContent = "";
+      const groups = [["萬子", t => t.kind.endsWith("m")], ["筒子", t => t.kind.endsWith("p")], ["索子", t => t.kind.endsWith("s")], ["字牌", t => JP[t.kind]], ["エクストラ", t => t.kind === "ex"]];
+      for (const [title, f] of groups) {
+        const tiles = ts.tiles.filter(f); if (!tiles.length) continue;
+        const g = document.createElement("div"); g.className = "grp";
+        const h = document.createElement("div"); h.className = "muted"; h.textContent = title + "　" + tiles.length + " 枚（番号 " + tiles[0].id + "〜" + tiles[tiles.length - 1].id + "）"; g.appendChild(h);
+        const box = document.createElement("div"); box.className = "tiles";
+        for (const t of tiles) {
+          const d = document.createElement("div"); d.className = "t" + (t.mark ? " mark" : "") + (t.kind === "ex" ? " ex" : "");
+          d.textContent = t.kind === "ex" ? t.name : label(t.kind);
+          const sm = document.createElement("small"); sm.textContent = t.id + (t.mark ? " " + t.mark : ""); d.appendChild(sm);
+          box.appendChild(d);
+        }
+        g.appendChild(box); pv.appendChild(g);
+      }
+      howto(ts);
+      $("download").disabled = false; $("copy").disabled = false;
+    } catch (e) {
+      cur = null;
+      $("count").textContent = "—"; $("tname").textContent = "—"; $("tid").textContent = "—"; $("fname").textContent = ""; $("preview").textContent = "";
+      $("errors").textContent = e.message || String(e);
+      $("download").disabled = true; $("copy").disabled = true;
+    }
+  }
+  // この牌表の印・エクストラ牌に機能を付けるための、ルール側の書き方を出す
+  function howto(ts) {
+    const box = $("howto"); box.textContent = "";
+    const add = (title, code, note) => { const d = document.createElement("div"); d.className = "how"; const b = document.createElement("b"); b.textContent = title; d.appendChild(b);
+      const c = document.createElement("code"); c.textContent = code; d.appendChild(c); if (note) { const n = document.createElement("div"); n.className = "muted"; n.textContent = note; d.appendChild(n); } box.appendChild(d); };
+    const marks = Array.from(new Set(ts.tiles.filter(t => t.mark).map(t => t.mark)));
+    const ex = ts.tiles.filter(t => t.kind === "ex");
+    if (!marks.length && !ex.length) { const d = document.createElement("div"); d.className = "muted"; d.textContent = "この牌表には印もエクストラ牌もありません（決めることはありません）。"; box.appendChild(d); return; }
+    if (marks.length) {
+      const o = {}; for (const m of marks) o[m] = { effects: ["dora"] };
+      add("印に機能を付ける：ルールの game_rules.marks", JSON.stringify(o),
+        "この牌表の印は " + marks.join("・") + "。effects に書けるのは dora（1 翻のドラ）／yaku（1 翻の役）／almighty（何にでも使える）／reverse（almighty と一緒に。逆ポッチ）／none（機能なし）。組み合わせ可。when で条件（立直中だけ、ツモだけ など）も付けられます。ルールに書かなかった印は、何の機能も持ちません（ルール生成の画面の右側に「機能なし」と出ます）。");
+    }
+    if (ex.length) {
+      add("エクストラ牌を抜きドラにする：ルールの game_rules.nuki", JSON.stringify({ enabled: true, tiles: ["ex"], value: 1 }),
+        "エクストラ牌 " + ex.length + " 枚（" + ex.map(t => t.name).join("・") + "）を、引いたら抜いて嶺上から 1 枚補充、1 枚につき value 翻。花牌の普通の使い方です。");
+      add("特定の 1 枚だけに機能を付ける：ルールの game_rules.mark_overrides", JSON.stringify([{ tile_id: ex[0].id, effects: ["dora"] }]),
+        "牌の番号で指定します（" + ex.map(t => t.name + "=" + t.id).join("、") + "）。印を付けていない牌にも使えます。");
+    }
+  }
+  function text() { return JSON.stringify(cur, null, 1) + "\n"; }
+  $("download").addEventListener("click", () => {
+    if (!cur) return;
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([text()], { type: "application/json" }));
+    a.download = NM.tileset.filename(cur); a.click();
+  });
+  $("copy").addEventListener("click", async () => { if (cur) { await navigator.clipboard.writeText(text()); $("status").textContent = "コピーしました"; } });
+  for (const el of document.querySelectorAll("input, select, textarea")) el.addEventListener("input", refresh);
+  window.NM_TILESETGEN = { current: () => cur, refresh: refresh };
+  refresh();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,243 @@
+{
+ "format": "nmahjong-ruleset",
+ "version": "1.0",
+ "name": "saikouisen",
+ "tileset": {
+  "name": "mpsz",
+  "id": "sha256:20763f9e589821262daceb0c9a9d863cc30aef989335a09eceb4a1fffc355e1b"
+ },
+ "players": 4,
+ "hand_size": 13,
+ "length": "east_south",
+ "winds": [
+  "E",
+  "S",
+  "W",
+  "N"
+ ],
+ "unknown": [
+  "end.tobi",
+  "game_rules.flow.riichi.min_points"
+ ],
+ "meta": {
+  "source": "https://saikouisen.com/_rule.php",
+  "note": "最高位戦：30000 持ち・オカなし、順位点 10-30、途中流局なし、和了やめ・聴牌やめなし、包なし、数え役満なし、役満の複合なし、国士の暗槓和了なし、−40P"
+ },
+ "wall_rules": {
+  "deal": "N_each_then_1_to_dealer",
+  "dead_wall": 14,
+  "dora_indicator": [
+   8
+  ],
+  "ura_indicator": [
+   9
+  ],
+  "kan_dora": [
+   6,
+   4,
+   2,
+   0
+  ],
+  "kan_ura": [
+   7,
+   5,
+   3,
+   1
+  ],
+  "rinshan": [
+   12,
+   13,
+   10,
+   11
+  ],
+  "break": {
+   "by": "dice"
+  }
+ },
+ "game_rules": {
+  "agari_form": "standard",
+  "marks": {
+   "red": {
+    "effects": [
+     "dora"
+    ]
+   }
+  },
+  "mark_overrides": [],
+  "dora": {
+   "indicator": true,
+   "ura": true,
+   "kan": true,
+   "kan_ura": true,
+   "kan_timing": {
+    "ankan": "immediate",
+    "minkan": "after_discard",
+    "kakan": "after_discard"
+   },
+   "values": {
+    "indicator": 1,
+    "ura": 1,
+    "kan": 1,
+    "kan_ura": 1
+   }
+  },
+  "nuki": {
+   "enabled": false
+  },
+  "yaku": {
+   "base": "riichi-standard",
+   "overrides": {},
+   "chiitoi_four_of_kind": false
+  },
+  "nagashi_mangan": {
+   "enabled": false
+  },
+  "pao": {
+   "yakuman": [],
+   "tsumo": "full",
+   "ron": "split",
+   "honba_kyotaku": "discarder",
+   "daiminkan_rinshan": false
+  },
+  "flow": {
+   "open_tanyao": true,
+   "atozuke": "allowed",
+   "kuikae": "forbidden",
+   "chi": true,
+   "ippatsu": true,
+   "riichi": {
+    "min_points": 1000,
+    "below_min": "forbidden",
+    "without_draw": true,
+    "on_houtei": true,
+    "furiten_riichi": true,
+    "ankan_after": "if_shape_unchanged",
+    "stick_at_end": "stays",
+    "stick_if_ronned": false
+   },
+   "open_riichi": {
+    "enabled": false
+   },
+   "renchan": {
+    "dealer_win": true,
+    "dealer_tenpai": true,
+    "all_noten": false,
+    "draw": false,
+    "by_bakaze": {}
+   },
+   "renchan_on_abort": true,
+   "ryukyoku": {
+    "nine_terminals": false,
+    "four_winds": false,
+    "four_kans": false,
+    "four_riichi": false,
+    "three_ron": false
+   },
+   "double_ron": false,
+   "triple_ron": "head",
+   "kyotaku_to": "kamicha",
+   "wareme": false,
+   "kokushi_ankan_chankan": false,
+   "ryuuiisou_requires_hatsu": false,
+   "chuuren_any_suit": true,
+   "max_kans": 4,
+   "pon": true,
+   "kan_kinds": [
+    "ankan",
+    "minkan",
+    "kakan"
+   ],
+   "max_kans_per_player": null
+  },
+  "scoring": {
+   "table": "standard",
+   "honba_points": 300,
+   "kyotaku_points": 1000,
+   "noten_penalty": 3000,
+   "mangan_round_up": true,
+   "round_to": 100,
+   "fu": {
+    "enabled": true,
+    "double_wind_pair": 2,
+    "rinshan_tsumo_fu": 2,
+    "chiitoi": "25fu_2han",
+    "open_pinfu_fu": 30,
+    "menzen_tsumo_pinfu": true,
+    "yakuhai_tanki_fu": 0
+   },
+   "limits": {
+    "sanbaiman_from": 11,
+    "kazoe_from": null,
+    "yakuman_base": 4,
+    "max_multiple": 1,
+    "stack_with_normal": false
+   },
+   "shibari": {
+    "from_honba": null,
+    "han": 2,
+    "exclude_dora": true
+   },
+   "tsumo_loss": "none",
+   "payment": "standard"
+  },
+  "penalties": {
+   "chombo": {
+    "kind": "rank_points",
+    "value": 40,
+    "replay": true,
+    "honba_increase": false
+   },
+   "false_call": {
+    "kind": "agari_houki"
+   },
+   "noten_riichi": "chombo"
+  }
+ },
+ "end": {
+  "tobi": {
+   "enabled": false
+  },
+  "negative_points": "continue",
+  "cold_points": null,
+  "time_limit_sec": null,
+  "extension": {
+   "enabled": false
+  },
+  "agari_yame": {
+   "enabled": false
+  },
+  "tenpai_yame": {
+   "enabled": false
+  },
+  "max_honba": null
+ },
+ "settlement": {
+  "start_points": 30000,
+  "return_points": 30000,
+  "unit": {
+   "name": "pt",
+   "points_per_unit": 1000,
+   "decimals": 1
+  },
+  "uma": [
+   30,
+   10,
+   -10,
+   -30
+  ],
+  "oka": "none",
+  "tie": "split",
+  "dealer_takes_all": false,
+  "chips": [],
+  "yakitori": {
+   "enabled": false
+  },
+  "external_points": [],
+  "payout": null,
+  "rounding": {
+   "score_to_1000": "none",
+   "remainder_to_top": false
+  }
+ },
+ "id": "sha256:a1bbfa1ba873d5005766ecad4b68aa306462430527d55e1819644353e5461a0b"
+}
